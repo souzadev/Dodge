@@ -22,6 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.souzadev.dodge.WorldActivity"
+            android:label="@string/title_activity_world"
+            android:parentActivityName="com.souzadev.dodge.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.souzadev.dodge.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.souzadev.dodge.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>
