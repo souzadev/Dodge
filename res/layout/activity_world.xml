@@ -10,7 +10,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/main_rLayout_bop"
+        android:id="@+id/main_rLayout_bot"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
     </RelativeLayout>
