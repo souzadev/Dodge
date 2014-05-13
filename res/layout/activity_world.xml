@@ -29,6 +29,13 @@
             android:onClick="buttonStop"
             android:text="Stop" />
 
+        <Chronometer
+            android:id="@+id/main_chronometer_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
     </RelativeLayout>
 
     <RelativeLayout

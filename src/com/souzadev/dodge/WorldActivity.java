@@ -4,26 +4,31 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 
 public class WorldActivity extends Activity{
-	//Const
-	private static final int MAX_BALLS = 5;
-	private static final int PLAYER_RADIUS = 3; //Player ball screen percentage
-	private static final int NPC_RADIUS = 5;
-	
 	//Ambient
 	private GameSurface gSurface;	
 	private Ball[] balls;
+	
+	private int maxBalls;
+	private int playerRadius;
+	private int npcRadius;
+	private float acc;
 	
 	private Thread gameThread;
 	
@@ -39,6 +44,12 @@ public class WorldActivity extends Activity{
 	private Float[] calibValues = new Float[3]; // Valores para calibração
 	private int calibrationCounter;
 	
+	//Chronometer
+	private Chronometer chrono;
+	private long startTime;
+	private long endTime;
+	private long deltaTime;
+	
 	//Utility
 	private PointF bounds;
 	
@@ -48,13 +59,23 @@ public class WorldActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_world);
 		
-		//Initialize members
+		//Initialize ambient
+		maxBalls = 5;
+		playerRadius = 3; //Player ball screen percentage
+		npcRadius = 8; //Non player ball screen percentage
+		acc = 0.01f; //Acceleration
+		
 		gSurface = new GameSurface(this);
-		balls = new Ball[MAX_BALLS];
+		
+		//SMALL SCREEN TESTS
+//		gSurface.setLayoutParams(new LayoutParams(300, 300));
+		
+		balls = new Ball[maxBalls];
 		
 		//Initialize components
 		botLayout = (RelativeLayout)findViewById(R.id.main_rLayout_bot);
 		botLayout.addView(gSurface);
+		chrono = (Chronometer)findViewById(R.id.main_chronometer_time);
 		
 		//Initialize services
         sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
@@ -85,12 +106,6 @@ public class WorldActivity extends Activity{
 	protected void onPause() {
 		super.onPause();
 		gameStop();
-	};
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		//gameStart();
 	};
 	
 	//*************************************** SENSOR LISTENER **********************************
@@ -158,7 +173,6 @@ public class WorldActivity extends Activity{
 		
 		@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
-			// TODO Auto-generated method stub
 		}
 	};
 	
@@ -184,20 +198,38 @@ public class WorldActivity extends Activity{
 	private void initBalls(){
 		bounds = new PointF(gSurface.getWidth(), gSurface.getHeight());
 		
+		PointF mid = new PointF(gSurface.getWidth() /2, gSurface.getHeight() / 2);
 		float hip = (float)Math.sqrt(Math.pow(gSurface.getWidth(), 2) + Math.pow(gSurface.getHeight(), 2));		
-		float pRadius = (hip * PLAYER_RADIUS) / 100;
-		float npcRadius = (hip * PLAYER_RADIUS) / 100;
+		float pRadius = (hip * playerRadius) / 100;
+		float npRadius = (hip * npcRadius) / 100;
+		System.out.println(pRadius+" - "+ npcRadius);
 		
-		balls[0] = new Ball(pRadius, new PointF(100f, 100f), new PointF(5f, 5f), Color.GREEN, Color.BLACK);
-		
-	}
+		balls[0] = new Ball(pRadius, mid, new PointF(5f, 5f), Color.GREEN, Color.BLACK);
+		balls[1] = new Ball(npRadius, new PointF(mid.x / 2, mid.y / 2), new PointF(-3f, 3f), Color.BLUE, Color.BLACK);
+		balls[2] = new Ball(npRadius, new PointF(mid.x * 1.5f, mid.y / 2), new PointF(2f, -1f), Color.RED, Color.BLACK);
+		balls[3] = new Ball(npRadius, new PointF(mid.x, mid.y * 1.5f), new PointF(-1f, -3f), Color.YELLOW, Color.BLACK);
+	}	
 	
+	//Main game sequence
 	private void gameStart(){
+		if (balls[0] == null){
+			initBalls();
+		}
+		
 		calibrate();
+		startTime = System.currentTimeMillis();
+		chrono.setBase(SystemClock.elapsedRealtime());
+		chrono.start();
+		
+		if(gameThread != null){
+			return;
+		}
+		
 		gameThread = new Thread(){
 			public void run(){
 				try{
 					while(true){
+						updateGame();
 						drawSurface();
 						Thread.sleep(1000 / 30);
 					}
@@ -213,18 +245,96 @@ public class WorldActivity extends Activity{
 		sensorManager.unregisterListener(playerMoveListener);
 		if (gameThread != null){
 			gameThread.interrupt();
-		}		
+			gameThread = null;
+		}
+		chrono.stop();
 	}
 	
-	private void gameResume(){
-		//TODO
+	private void gameEnd(){
+		gameStop();
+		
+		endTime = System.currentTimeMillis();
+		deltaTime = endTime - startTime;
+	}
+
+	//Updates
+	private void updateGame(){
+		//Update movement
+		for (int i = 1; i < maxBalls; i++){
+			if (balls[i] != null){
+				updatePosition(balls[i]);
+				updateSpeed(balls[i]);
+			}			
+		}
+		
+		//Detect collisions
+		if(detectCollisions()){
+			ballCollision();
+		}
 	}
 	
+	private void updatePosition(Ball ball){
+		ball.getPosition().x += ball.getSpeed().x;
+		if((ball.getPosition().x + ball.getRadius() > bounds.x) || (ball.getPosition().x - ball.getRadius() < 0)){
+			ball.getSpeed().x *= (-1);
+		}
+		
+		ball.getPosition().y += ball.getSpeed().y;
+		if((ball.getPosition().y + ball.getRadius() > bounds.y) || (ball.getPosition().y - ball.getRadius() < 0)){
+			ball.getSpeed().y *= (-1);
+		}
+		ball.getPaint().setShader(new RadialGradient(ball.getPosition().x, ball.getPosition().y, ball.getRadius(), ball.getInColor(), ball.getExtColor(), Shader.TileMode.CLAMP));
+	}
+	
+	private void updateSpeed(Ball ball){
+		if (ball.getSpeed().x > 0){
+			ball.getSpeed().x += acc;
+		}else{
+			ball.getSpeed().x -= acc;
+		}
+
+		if (ball.getSpeed().y > 0){
+			ball.getSpeed().y += acc;
+		}else{
+			ball.getSpeed().y -= acc;
+		}
+	}
+	
+	//Collisions
+	private boolean detectCollisions(){
+		float smallRadius = balls[0].getRadius();
+		float bigRadius = balls[0].getRadius();
+		if (balls[1].getRadius() > bigRadius){
+			bigRadius = balls[1].getRadius();			
+		}else{
+			smallRadius = balls[1].getRadius();
+		}
+		
+		for (int i = 1; i < maxBalls; i++){
+			if (balls[i] != null){
+				if(getDistance(balls[0], balls[i]) < (bigRadius + smallRadius)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	private float getDistance(Ball ball0, Ball ball1){
+		float dist = (float)Math.sqrt(Math.pow((ball0.getPosition().x - ball1.getPosition().x),2) + Math.pow((ball0.getPosition().y - ball1.getPosition().y),2));		
+		return dist;
+	}
+	
+	private void ballCollision(){
+		gameEnd();
+	}
+
+	//Draw
 	private void drawSurface(){
 		SurfaceHolder holder = gSurface.getHolder();
 		Canvas canvas = holder.lockCanvas();
 		canvas.drawColor(Color.LTGRAY);
-		for(int i = 0; i < MAX_BALLS; i++){
+		for(int i = 0; i < maxBalls; i++){
 			if (balls[i] != null){
 				canvas.drawCircle(balls[i].getPosition().x, balls[i].getPosition().y, balls[i].getRadius(), balls[i].getPaint());
 			}
@@ -234,7 +344,6 @@ public class WorldActivity extends Activity{
 	
 	//******************************************* PUBLIC ******************************************
 	public void buttonStart(View view){
-		initBalls();
 		gameStart();
 	}
 	
