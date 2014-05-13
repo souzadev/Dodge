@@ -43,6 +43,11 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    public void showScore(View view){
+    	Intent intent = new Intent(this, ScoreActivity.class);
+    	startActivity(intent);
+    }
+    
     public void exitApp(View view){
     	this.finish();
     }    
