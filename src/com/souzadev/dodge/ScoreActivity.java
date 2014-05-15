@@ -1,24 +1,68 @@
 package com.souzadev.dodge;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class ScoreActivity extends Activity {
-
+	//Core
+	private Intent intent;
+	private String name;
+	private long time;
+	private int position;
+	
+	//Components
+	private TextView textView;
+	private EditText editText;
+	private Button button;
+	
+	//List
+	private ListView listView;
+	private ArrayAdapter<String> listArrayAdapter;
+	
+	//Time
+	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS");
+	
+	//******************************* OVERRIDE ***************************************
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_score);
+		
+		//Get time from intent
+		intent = getIntent();
+		time = intent.getLongExtra(MainActivity.EXTRA_TIME, 0);
+		
+		//Initialize list and components
+		initializeComponents();
+		if (listArrayAdapter.getCount() < 1 ){
+			resetScore();
+		}
+		
+		position = checkPosition(time);
+		if (position < 10){			
+			editText.setVisibility(View.VISIBLE);
+			button.setVisibility(View.VISIBLE);
+		}
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.score, menu);
@@ -28,9 +72,112 @@ public class ScoreActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.score_action_reset) {
+			resetScore();
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	//************************************* PRIVATE ****************************************
+	
+	private void initializeComponents(){
+		
+		textView = (TextView)findViewById(R.id.score_textView_time);
+		textView.setText(sdf.format(time));
+		if (time > 0){
+			textView.setVisibility(View.VISIBLE);
+		}
+		editText = (EditText)findViewById(R.id.score_editText_name);
+		button = (Button)findViewById(R.id.score_button_save);
+		
+		listView = (ListView)findViewById(R.id.score_listView_score);		
+		listArrayAdapter = new ArrayAdapter<String>(this, R.layout.layout_listitens, readFile());
+		listView.setAdapter(listArrayAdapter);
+	}
+	
+	private void writeFile(){
+		try{
+			OutputStreamWriter writer = new OutputStreamWriter(openFileOutput("hsc", Context.MODE_PRIVATE));
+			
+			int count = listArrayAdapter.getCount();
+			if (count > 9) count = 9;
+			
+			for(int i = 0; i <= count; i++){
+				writer.append(listArrayAdapter.getItem(i) + "\n");
+			}
+			writer.close();
+		}catch(Exception ex){			
+			ex.printStackTrace();
+		}
+	}
+	
+	private ArrayList<String> readFile(){
+		ArrayList<String> ret = new ArrayList<String>();
+		
+		try{
+			InputStream input = openFileInput("hsc");
+			if(input != null){
+				InputStreamReader reader = new InputStreamReader(input);
+				BufferedReader buffReader = new BufferedReader(reader);
+				String line;
+				while((line = buffReader.readLine()) != null){
+					ret.add(line);
+				}
+				reader.close();
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return ret;
+	}
+	
+	private void addScore(long time, String name){
+		String score = sdf.format(time) + " - " + name;
+		listArrayAdapter.insert(score, position);
+		listArrayAdapter.notifyDataSetChanged();
+		writeFile();
+	}
+	
+	private int checkPosition(long time){
+		int position = listArrayAdapter.getCount();
+		long listTime;
+				
+		try{
+			for (int i = 0; i < listArrayAdapter.getCount(); i++){
+				listTime = Long.parseLong(listArrayAdapter.getItem(i).substring(0, 9).replaceAll("[:.]", ""));
+				if(time > listTime){
+					position = i;
+					break;
+				}
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		if (time == 0){
+			position = 10;
+		}
+		return position;
+	}
+	
+	private void resetScore(){
+		listArrayAdapter.clear();
+		listArrayAdapter.add("01:00.000 - Master");
+		listArrayAdapter.add("00:50.000 - Expert");
+		listArrayAdapter.add("00:40.000 - Advanced");
+		listArrayAdapter.add("00:30.000 - Intermediate");
+		listArrayAdapter.add("00:20.000 - Beginner");
+		listArrayAdapter.notifyDataSetChanged();
+		writeFile();
+	}
+	
+	//***************************************** PUBLICS ***************************************************
+	public void saveScore(View view){
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+		name = editText.getText().toString();
+		addScore(time, name);
+
+		editText.setVisibility(View.GONE);
+		button.setVisibility(View.GONE);
 	}
 }

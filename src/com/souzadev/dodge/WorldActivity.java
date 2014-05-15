@@ -1,6 +1,7 @@
 package com.souzadev.dodge;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -16,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 
@@ -234,7 +234,7 @@ public class WorldActivity extends Activity{
 						Thread.sleep(1000 / 30);
 					}
 				}catch(Exception ex){
-					ex.printStackTrace();
+//					ex.printStackTrace();
 				}
 			}
 		};
@@ -255,6 +255,10 @@ public class WorldActivity extends Activity{
 		
 		endTime = System.currentTimeMillis();
 		deltaTime = endTime - startTime;
+		
+		Intent intent = new Intent(this, ScoreActivity.class);
+		intent.putExtra(MainActivity.EXTRA_TIME, deltaTime);
+		startActivity(intent);
 	}
 
 	//Updates

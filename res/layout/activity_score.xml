@@ -9,43 +9,43 @@
     tools:context=".ScoreActivity" >
 	
     <TextView
-        android:id="@+id/time_textView"
+        android:id="@+id/score_textView_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:padding="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="gone"        
+        android:visibility="gone"
         android:text="" />
     
     <EditText
-        android:id="@+id/score_editText"
+        android:id="@+id/score_editText_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/time_textView"
-        android:layout_toLeftOf="@+id/score_button"
+        android:layout_below="@+id/score_textView_time"
+        android:layout_toLeftOf="@+id/score_button_save"
         android:maxLength="15"
         android:visibility="gone"
         android:hint="Name"/>
     
     <Button
-        android:id="@+id/score_button"
+        android:id="@+id/score_button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/score_editText"
-        android:layout_alignBottom="@+id/score_editText"
+        android:layout_alignTop="@+id/score_editText_name"
+        android:layout_alignBottom="@+id/score_editText_name"
         android:layout_alignParentRight="true"
         android:onClick="saveScore"
         android:visibility="gone"
         android:text="Save" />
 
     <ListView
-        android:id="@+id/score_listView"
+        android:id="@+id/score_listView_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/score_editText"
+        android:layout_below="@+id/score_editText_name"
         android:layout_centerHorizontal="true" />    
     
 </RelativeLayout>
