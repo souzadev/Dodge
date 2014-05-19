@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,12 +22,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ScoreActivity extends Activity {
+public class ScoreActivity extends Activity {	
 	//Core
 	private Intent intent;
 	private String name;
 	private long time;
 	private int position;
+	
+	private SharedPreferences sharedPrefs;
 	
 	//Components
 	private TextView textView;
@@ -45,6 +48,8 @@ public class ScoreActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_score);
+		
+		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_MAIN_PREFS) ,Context.MODE_PRIVATE);
 		
 		//Get time from intent
 		intent = getIntent();
@@ -77,6 +82,13 @@ public class ScoreActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		this.finish();
+	}
+	
 	//************************************* PRIVATE ****************************************
 	
 	private void initializeComponents(){
@@ -87,20 +99,21 @@ public class ScoreActivity extends Activity {
 			textView.setVisibility(View.VISIBLE);
 		}
 		editText = (EditText)findViewById(R.id.score_editText_name);
+		editText.setText(sharedPrefs.getString(getString(R.string.prefs_LAST_NAME), ""));
+		
 		button = (Button)findViewById(R.id.score_button_save);
 		
-		listView = (ListView)findViewById(R.id.score_listView_score);		
+		listView = (ListView)findViewById(R.id.score_listView_score);
 		listArrayAdapter = new ArrayAdapter<String>(this, R.layout.layout_listitens, readFile());
 		listView.setAdapter(listArrayAdapter);
 	}
 	
 	private void writeFile(){
-		try{
-			OutputStreamWriter writer = new OutputStreamWriter(openFileOutput("hsc", Context.MODE_PRIVATE));
-			
-			int count = listArrayAdapter.getCount();
+		try{									
+			int count = listArrayAdapter.getCount() - 1;
 			if (count > 9) count = 9;
 			
+			OutputStreamWriter writer = new OutputStreamWriter(openFileOutput("hsc", Context.MODE_PRIVATE));
 			for(int i = 0; i <= count; i++){
 				writer.append(listArrayAdapter.getItem(i) + "\n");
 			}
@@ -135,6 +148,11 @@ public class ScoreActivity extends Activity {
 		listArrayAdapter.insert(score, position);
 		listArrayAdapter.notifyDataSetChanged();
 		writeFile();
+		
+		//Save last name
+		SharedPreferences.Editor editor = sharedPrefs.edit();
+		editor.putString(getString(R.string.prefs_LAST_NAME), name);
+		editor.commit();
 	}
 	
 	private int checkPosition(long time){

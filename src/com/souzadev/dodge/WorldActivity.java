@@ -1,7 +1,9 @@
 package com.souzadev.dodge;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -22,15 +24,22 @@ import android.widget.RelativeLayout;
 
 public class WorldActivity extends Activity{
 	//Ambient
-	private GameSurface gSurface;	
-	private Ball[] balls;
-	
-	private int maxBalls;
-	private int playerRadius;
-	private int npcRadius;
-	private float acc;
-	
 	private Thread gameThread;
+	private GameSurface gSurface;	
+	private Ball[] balls;	
+	private int maxBalls;
+	
+	SharedPreferences sharedPrefs;
+	//Player
+	private int playerRadius;
+	private PointF playerSpeed;
+	private int playerInColor;
+	private int playerExtColor;
+	//NPC
+	private int npcRadius;
+	private int npcInColor;
+	private int npcExtColor;
+	private float acc;
 	
 	//Sensors
 	private SensorManager sensorManager;
@@ -60,10 +69,20 @@ public class WorldActivity extends Activity{
 		setContentView(R.layout.activity_world);
 		
 		//Initialize ambient
+		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_MAIN_PREFS) ,Context.MODE_PRIVATE);
+		
+		
 		maxBalls = 5;
 		playerRadius = 3; //Player ball screen percentage
+		playerSpeed = new PointF(5,5);
+		playerInColor = sharedPrefs.getInt(getString(R.string.prefs_PLAYER_IN_COLOR), Color.GREEN);
+		playerExtColor = sharedPrefs.getInt(getString(R.string.prefs_PLAYER_EXT_COLOR), Color.BLACK);
+		
 		npcRadius = 8; //Non player ball screen percentage
+		npcInColor = sharedPrefs.getInt(getString(R.string.prefs_NPC_IN_COLOR), Color.RED);
+		npcExtColor = sharedPrefs.getInt(getString(R.string.prefs_NPC_EXT_COLOR), Color.BLACK);
 		acc = 0.01f; //Acceleration
+				
 		
 		gSurface = new GameSurface(this);
 		
@@ -195,25 +214,24 @@ public class WorldActivity extends Activity{
 	}
 	
 	//******************************************* PRIVATE ****************************************
-	private void initBalls(){
+	private void makeBalls(){
 		bounds = new PointF(gSurface.getWidth(), gSurface.getHeight());
 		
 		PointF mid = new PointF(gSurface.getWidth() /2, gSurface.getHeight() / 2);
 		float hip = (float)Math.sqrt(Math.pow(gSurface.getWidth(), 2) + Math.pow(gSurface.getHeight(), 2));		
 		float pRadius = (hip * playerRadius) / 100;
 		float npRadius = (hip * npcRadius) / 100;
-		System.out.println(pRadius+" - "+ npcRadius);
 		
-		balls[0] = new Ball(pRadius, mid, new PointF(5f, 5f), Color.GREEN, Color.BLACK);
-		balls[1] = new Ball(npRadius, new PointF(mid.x / 2, mid.y / 2), new PointF(-3f, 3f), Color.BLUE, Color.BLACK);
-		balls[2] = new Ball(npRadius, new PointF(mid.x * 1.5f, mid.y / 2), new PointF(2f, -1f), Color.RED, Color.BLACK);
-		balls[3] = new Ball(npRadius, new PointF(mid.x, mid.y * 1.5f), new PointF(-1f, -3f), Color.YELLOW, Color.BLACK);
+		balls[0] = new Ball(pRadius, mid, playerSpeed, playerInColor, playerExtColor);
+		balls[1] = new Ball(npRadius, new PointF(mid.x / 2, mid.y / 2), new PointF(-3f, 3f), npcInColor, npcExtColor);
+		balls[2] = new Ball(npRadius, new PointF(mid.x * 1.5f, mid.y / 2), new PointF(2f, -1f), npcInColor, npcExtColor);
+		balls[3] = new Ball(npRadius, new PointF(mid.x, mid.y * 1.5f), new PointF(-1f, -3f), npcInColor, npcExtColor);
 	}	
 	
 	//Main game sequence
 	private void gameStart(){
 		if (balls[0] == null){
-			initBalls();
+			makeBalls();
 		}
 		
 		calibrate();

@@ -46,8 +46,7 @@ public final class R {
         public static final int activity_score=0x7f030001;
         public static final int activity_settings=0x7f030002;
         public static final int activity_world=0x7f030003;
-        public static final int fragment_score=0x7f030004;
-        public static final int layout_listitens=0x7f030005;
+        public static final int layout_listitens=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -56,12 +55,29 @@ public final class R {
         public static final int world=0x7f070003;
     }
     public static final class string {
-        public static final int action_settings=0x7f050002;
+        public static final int action_settings=0x7f050001;
+        /**  APP 
+         */
         public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
-        public static final int title_activity_score=0x7f050005;
-        public static final int title_activity_settings=0x7f050004;
-        public static final int title_activity_world=0x7f050003;
+        public static final int prefs_KEEP_LAST_NAME=0x7f050004;
+        public static final int prefs_LAST_NAME=0x7f050003;
+        /**  Prefs 
+         */
+        public static final int prefs_MAIN_PREFS=0x7f050002;
+        public static final int prefs_NPC_EXT_COLOR=0x7f050009;
+        public static final int prefs_NPC_IN_COLOR=0x7f050008;
+        public static final int prefs_PLAYER_EXT_COLOR=0x7f050007;
+        public static final int prefs_PLAYER_IN_COLOR=0x7f050006;
+        public static final int prefs_TRIPP=0x7f050005;
+        /**  Score Activity 
+         */
+        public static final int title_activity_score=0x7f05000c;
+        /**  Settings Activity 
+         */
+        public static final int title_activity_settings=0x7f05000b;
+        /**  World Activity 
+         */
+        public static final int title_activity_world=0x7f05000a;
     }
     public static final class style {
         /** 
