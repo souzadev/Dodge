@@ -22,31 +22,34 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int bg=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000d;
         public static final int main_button_exit=0x7f080003;
         public static final int main_button_play=0x7f080000;
         public static final int main_button_score=0x7f080002;
         public static final int main_button_settings=0x7f080001;
-        public static final int main_button_start=0x7f080009;
-        public static final int main_button_stop=0x7f08000a;
-        public static final int main_chronometer_time=0x7f08000b;
-        public static final int main_rLayout_bot=0x7f08000c;
-        public static final int main_rLayout_top=0x7f080008;
-        public static final int score_action_reset=0x7f08000e;
+        public static final int main_button_start=0x7f08000b;
+        public static final int main_button_stop=0x7f08000c;
+        public static final int main_chronometer_time=0x7f08000d;
+        public static final int main_rLayout_bot=0x7f08000e;
+        public static final int main_rLayout_top=0x7f08000a;
+        public static final int score_action_reset=0x7f08000f;
         public static final int score_button_save=0x7f080006;
         public static final int score_editText_name=0x7f080005;
         public static final int score_listView_score=0x7f080007;
         public static final int score_textView_time=0x7f080004;
+        public static final int settings_switch_keepName=0x7f080008;
+        public static final int settings_switch_tripp=0x7f080009;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_score=0x7f030001;
         public static final int activity_settings=0x7f030002;
         public static final int activity_world=0x7f030003;
-        public static final int layout_listitens=0x7f030004;
+        public static final int layout_color=0x7f030004;
+        public static final int layout_listitens=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -55,29 +58,32 @@ public final class R {
         public static final int world=0x7f070003;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
+        public static final int action_settings=0x7f05000c;
         /**  APP 
          */
-        public static final int app_name=0x7f050000;
-        public static final int prefs_KEEP_LAST_NAME=0x7f050004;
-        public static final int prefs_LAST_NAME=0x7f050003;
+        public static final int app_name=0x7f05000b;
+        public static final int prefs_boolean_KEEP_LAST_NAME=0x7f050002;
+        public static final int prefs_boolean_TRIPP=0x7f050003;
+        public static final int prefs_int_NPC_EXT_COLOR=0x7f050009;
+        public static final int prefs_int_NPC_IN_COLOR=0x7f050008;
+        public static final int prefs_int_NPC_RADIUS=0x7f05000a;
+        public static final int prefs_int_PLAYER_EXT_COLOR=0x7f050005;
+        public static final int prefs_int_PLAYER_IN_COLOR=0x7f050004;
+        public static final int prefs_int_PLAYER_RADIUS=0x7f050007;
+        public static final int prefs_int_PLAYER_SPEED=0x7f050006;
+        public static final int prefs_string_LAST_NAME=0x7f050001;
         /**  Prefs 
          */
-        public static final int prefs_MAIN_PREFS=0x7f050002;
-        public static final int prefs_NPC_EXT_COLOR=0x7f050009;
-        public static final int prefs_NPC_IN_COLOR=0x7f050008;
-        public static final int prefs_PLAYER_EXT_COLOR=0x7f050007;
-        public static final int prefs_PLAYER_IN_COLOR=0x7f050006;
-        public static final int prefs_TRIPP=0x7f050005;
+        public static final int prefs_string_file_MAIN_PREFS=0x7f050000;
         /**  Score Activity 
          */
-        public static final int title_activity_score=0x7f05000c;
+        public static final int title_activity_score=0x7f05000f;
         /**  Settings Activity 
          */
-        public static final int title_activity_settings=0x7f05000b;
+        public static final int title_activity_settings=0x7f05000e;
         /**  World Activity 
          */
-        public static final int title_activity_world=0x7f05000a;
+        public static final int title_activity_world=0x7f05000d;
     }
     public static final class style {
         /** 

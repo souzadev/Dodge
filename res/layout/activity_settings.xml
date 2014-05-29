@@ -1,10 +1,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin">
+    android:orientation="vertical" >
+
+    <Switch
+        android:id="@+id/settings_switch_keepName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:onClick="switchClick"
+        android:text="Keep last score name." />
+
+    <Switch
+        android:id="@+id/settings_switch_tripp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="switchClick"
+        android:text="Tripp?" />
 
 </LinearLayout>

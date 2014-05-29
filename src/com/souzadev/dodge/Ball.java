@@ -65,6 +65,16 @@ public class Ball {
 		fixShader();
 	}
 	
+	public void setInColor(int inColor){
+		this.inColor = inColor;
+		fixShader();
+	}
+	
+	public void setExtColor(int extColor){
+		this.extColor = extColor;
+		fixShader();
+	}
+	
 	public void setPaint(Paint paint){
 		this.paint = paint;
 	}

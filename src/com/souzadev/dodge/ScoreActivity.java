@@ -49,7 +49,7 @@ public class ScoreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_score);
 		
-		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_MAIN_PREFS) ,Context.MODE_PRIVATE);
+		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_string_file_MAIN_PREFS) ,Context.MODE_PRIVATE);
 		
 		//Get time from intent
 		intent = getIntent();
@@ -99,7 +99,9 @@ public class ScoreActivity extends Activity {
 			textView.setVisibility(View.VISIBLE);
 		}
 		editText = (EditText)findViewById(R.id.score_editText_name);
-		editText.setText(sharedPrefs.getString(getString(R.string.prefs_LAST_NAME), ""));
+		if(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_KEEP_LAST_NAME), true)){
+			editText.setText(sharedPrefs.getString(getString(R.string.prefs_string_LAST_NAME), ""));
+		}
 		
 		button = (Button)findViewById(R.id.score_button_save);
 		
@@ -151,7 +153,7 @@ public class ScoreActivity extends Activity {
 		
 		//Save last name
 		SharedPreferences.Editor editor = sharedPrefs.edit();
-		editor.putString(getString(R.string.prefs_LAST_NAME), name);
+		editor.putString(getString(R.string.prefs_string_LAST_NAME), name);
 		editor.commit();
 	}
 	
@@ -178,6 +180,7 @@ public class ScoreActivity extends Activity {
 	}
 	
 	private void resetScore(){
+		//TODO Add to strings file
 		listArrayAdapter.clear();
 		listArrayAdapter.add("01:00.000 - Master");
 		listArrayAdapter.add("00:50.000 - Expert");

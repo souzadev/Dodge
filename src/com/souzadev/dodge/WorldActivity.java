@@ -1,5 +1,8 @@
 package com.souzadev.dodge;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.animation.CycleInterpolator;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 
@@ -62,6 +66,9 @@ public class WorldActivity extends Activity{
 	//Utility
 	private PointF bounds;
 	
+	//Animation
+	ObjectAnimator objAnimator;
+	
 	//*********************************** OVERRIDE *************************************
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,20 +76,19 @@ public class WorldActivity extends Activity{
 		setContentView(R.layout.activity_world);
 		
 		//Initialize ambient
-		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_MAIN_PREFS) ,Context.MODE_PRIVATE);
+		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_string_file_MAIN_PREFS) ,Context.MODE_PRIVATE);
 		
 		
 		maxBalls = 5;
-		playerRadius = 3; //Player ball screen percentage
-		playerSpeed = new PointF(5,5);
-		playerInColor = sharedPrefs.getInt(getString(R.string.prefs_PLAYER_IN_COLOR), Color.GREEN);
-		playerExtColor = sharedPrefs.getInt(getString(R.string.prefs_PLAYER_EXT_COLOR), Color.BLACK);
+		playerRadius = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_RADIUS), 3); //Player ball screen percentage
+		playerSpeed = new PointF(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5), sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5));
+		playerInColor = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), Color.GREEN);
+		playerExtColor = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_EXT_COLOR), Color.BLACK);
 		
-		npcRadius = 8; //Non player ball screen percentage
-		npcInColor = sharedPrefs.getInt(getString(R.string.prefs_NPC_IN_COLOR), Color.RED);
-		npcExtColor = sharedPrefs.getInt(getString(R.string.prefs_NPC_EXT_COLOR), Color.BLACK);
+		npcRadius = sharedPrefs.getInt(getString(R.string.prefs_int_NPC_RADIUS), 8); //Non player ball screen percentage
+		npcInColor = sharedPrefs.getInt(getString(R.string.prefs_int_NPC_IN_COLOR), Color.RED);
+		npcExtColor = sharedPrefs.getInt(getString(R.string.prefs_int_NPC_EXT_COLOR), Color.BLACK);
 		acc = 0.01f; //Acceleration
-				
 		
 		gSurface = new GameSurface(this);
 		
@@ -102,8 +108,6 @@ public class WorldActivity extends Activity{
         
         //Initialize Utility
         calibrationCounter = 0;
-        
-        
 	}
 
 	@Override
@@ -115,9 +119,6 @@ public class WorldActivity extends Activity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {		
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -243,9 +244,14 @@ public class WorldActivity extends Activity{
 			return;
 		}
 		
+		//Tripp animations
+		if(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false)){
+			animateColors();
+		}
+		
 		gameThread = new Thread(){
-			public void run(){
-				try{
+			public void run(){				
+				try{					
 					while(true){
 						updateGame();
 						drawSurface();
@@ -355,7 +361,9 @@ public class WorldActivity extends Activity{
 	private void drawSurface(){
 		SurfaceHolder holder = gSurface.getHolder();
 		Canvas canvas = holder.lockCanvas();
-		canvas.drawColor(Color.LTGRAY);
+		if(!sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false)){
+			canvas.drawColor(Color.LTGRAY);
+		}
 		for(int i = 0; i < maxBalls; i++){
 			if (balls[i] != null){
 				canvas.drawCircle(balls[i].getPosition().x, balls[i].getPosition().y, balls[i].getRadius(), balls[i].getPaint());
@@ -363,6 +371,38 @@ public class WorldActivity extends Activity{
 		}
 		holder.unlockCanvasAndPost(canvas);
 	}
+	
+	//Animations
+	private void animateColors(){
+		objAnimator = ObjectAnimator.ofInt(balls[0], "inColor", Color.BLUE, Color.CYAN, Color.GRAY, Color.RED, Color.YELLOW, Color.GREEN);
+		objAnimator.setEvaluator(new ArgbEvaluator());
+		objAnimator.setRepeatCount(ValueAnimator.INFINITE);
+		objAnimator.setRepeatMode(ValueAnimator.REVERSE);
+		objAnimator.setDuration(5000);
+		objAnimator.start();
+		
+		objAnimator = ObjectAnimator.ofInt(balls[1], "inColor", Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, Color.YELLOW, Color.RED);
+		objAnimator.setEvaluator(new ArgbEvaluator());
+		objAnimator.setRepeatCount(ValueAnimator.INFINITE);
+		objAnimator.setRepeatMode(ValueAnimator.REVERSE);
+		objAnimator.setDuration(4000);
+		objAnimator.start();
+		
+		objAnimator = ObjectAnimator.ofInt(balls[2], "inColor", Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, Color.YELLOW, Color.RED);
+		objAnimator.setEvaluator(new ArgbEvaluator());
+		objAnimator.setRepeatCount(ValueAnimator.INFINITE);
+		objAnimator.setRepeatMode(ValueAnimator.REVERSE);
+		objAnimator.setDuration(3000);
+		objAnimator.start();
+		
+		objAnimator = ObjectAnimator.ofInt(balls[3], "inColor", Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, Color.YELLOW, Color.RED);
+		objAnimator.setEvaluator(new ArgbEvaluator());
+		objAnimator.setRepeatCount(ValueAnimator.INFINITE);
+		objAnimator.setRepeatMode(ValueAnimator.REVERSE);
+		objAnimator.setDuration(2000);
+		objAnimator.start();
+	}
+	
 	
 	//******************************************* PUBLIC ******************************************
 	public void buttonStart(View view){

@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Prefs -->
+    <string name="prefs_string_file_MAIN_PREFS">MAIN_PREFS</string>
+    
+    <string name="prefs_string_LAST_NAME">LAST_NAME</string>
+    <string name="prefs_boolean_KEEP_LAST_NAME">KEEP_LAST_NAME</string>
+    <string name="prefs_boolean_TRIPP">TRIPP</string>
+    
+    <string name="prefs_int_PLAYER_IN_COLOR">PLAYER_IN_COLOR</string>
+    <string name="prefs_int_PLAYER_EXT_COLOR">PLAYER_EXT_COLOR</string>
+    <string name="prefs_int_PLAYER_SPEED">PLAYER_SPEED</string>
+    <string name="prefs_int_PLAYER_RADIUS">PLAYER_RADIUS</string>
+    
+    <string name="prefs_int_NPC_IN_COLOR">NPC_IN_COLOR</string>
+    <string name="prefs_int_NPC_EXT_COLOR">NPC_EXT_COLOR</string>
+    <string name="prefs_int_NPC_RADIUS">NPC_RADIUS</string>
+    
 	<!-- APP -->
     <string name="app_name">Dodge</string>
     <string name="action_settings">Settings</string>
-    
-    <!-- Prefs -->
-    <string name="prefs_MAIN_PREFS">MAIN_PREFS</string>
-    <string name="prefs_LAST_NAME">LAST_NAME</string>
-    <string name="prefs_KEEP_LAST_NAME">KEEP_LAST_NAME</string>
-    <string name="prefs_TRIPP">TRIPP</string>
-    <string name="prefs_PLAYER_IN_COLOR">PLAYER_IN_COLOR</string>
-    <string name="prefs_PLAYER_EXT_COLOR">PLAYER_EXT_COLOR</string>
-    <string name="prefs_NPC_IN_COLOR">NPC_IN_COLOR</string>
-    <string name="prefs_NPC_EXT_COLOR">NPC_EXT_COLOR</string>
     
     
     <!-- World Activity -->
