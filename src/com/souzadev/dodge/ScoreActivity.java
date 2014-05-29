@@ -101,6 +101,7 @@ public class ScoreActivity extends Activity {
 		editText = (EditText)findViewById(R.id.score_editText_name);
 		if(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_KEEP_LAST_NAME), true)){
 			editText.setText(sharedPrefs.getString(getString(R.string.prefs_string_LAST_NAME), ""));
+			editText.selectAll();
 		}
 		
 		button = (Button)findViewById(R.id.score_button_save);
