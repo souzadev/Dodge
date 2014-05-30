@@ -20,6 +20,30 @@
     <string name="app_name">Dodge</string>
     <string name="action_settings">Settings</string>
     
+    <!-- Main Activity -->
+    <string name="main_activity_play">Play</string>
+    <string name="main_activity_settings">Settings</string>
+    <string name="main_activity_bestTimes">Best Times</string>
+    <string name="main_activity_exit">Exit</string>
+    
+    <!-- World Activity -->
+    <string name="world_activity_start">Start</string>
+    <string name="world_activity_stop">Stop</string>
+    
+    <!-- Score Activity -->
+    <string name="score_action_resetScore">Reset Times</string>
+    <string name="score_activity_name">Nome</string>
+    <string name="score_activity_save">Save</string>
+    
+    <string name="score_activity_listMaster">Master</string>
+    <string name="score_activity_listExpert">Expert</string>
+    <string name="score_activity_listAdvanced">Advanced</string>
+    <string name="score_activity_listIntermediate">Intermediate</string>
+    <string name="score_activity_listBeginner">Beginner</string>
+    
+    <!-- Settings Activity -->
+    <string name="settings_activity_keepLastName">Keep last used name.</string>
+    <string name="settings_activity_tripp">Tripp?</string>
     
     <!-- World Activity -->
     <string name="title_activity_world">WorldActivity</string>

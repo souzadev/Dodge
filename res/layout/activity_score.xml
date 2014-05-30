@@ -28,7 +28,7 @@
         android:layout_toLeftOf="@+id/score_button_save"
         android:maxLength="15"
         android:visibility="gone"
-        android:hint="Name"/>
+        android:hint="@string/score_activity_name"/>
     
     <Button
         android:id="@+id/score_button_save"
@@ -39,7 +39,7 @@
         android:layout_alignParentRight="true"
         android:onClick="saveScore"
         android:visibility="gone"
-        android:text="Save" />
+        android:text="@string/score_activity_save" />
 
     <ListView
         android:id="@+id/score_listView_score"

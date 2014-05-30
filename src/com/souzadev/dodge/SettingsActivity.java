@@ -36,7 +36,6 @@ public class SettingsActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
 		return super.onOptionsItemSelected(item);
 	}
 	

@@ -7,29 +7,39 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
-
+	private int bgColor;
 	//************************************* CONSTRUCTOR **************************************
 	public GameSurface(Context context) {
 		super(context);
-		getHolder().addCallback(this);		
+		getHolder().addCallback(this);
+		
+		bgColor = Color.parseColor("#D5D5DA"); 
 	}
 
 	//*************************************** OVERRIDE **************************************
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		Canvas canvas = holder.lockCanvas();
-		canvas.drawColor(Color.LTGRAY);
+		canvas.drawColor(bgColor);
 		holder.unlockCanvasAndPost(canvas);
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
+	}	
+	
+	//**************************************** SETTERS **************************************
+	public void setBgColor(int bgColor){
+		this.bgColor = bgColor;
+	}
+	
+	//*************************************** GETTERS ***************************************
+	public int getBgColor(){
+		return bgColor;
 	}
 }

@@ -26,6 +26,7 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
+        public static final int main_action_settings=0x7f08000f;
         public static final int main_button_exit=0x7f080003;
         public static final int main_button_play=0x7f080000;
         public static final int main_button_score=0x7f080002;
@@ -35,7 +36,7 @@ public final class R {
         public static final int main_chronometer_time=0x7f08000d;
         public static final int main_rLayout_bot=0x7f08000e;
         public static final int main_rLayout_top=0x7f08000a;
-        public static final int score_action_reset=0x7f08000f;
+        public static final int score_action_reset=0x7f080010;
         public static final int score_button_save=0x7f080006;
         public static final int score_editText_name=0x7f080005;
         public static final int score_listView_score=0x7f080007;
@@ -48,8 +49,7 @@ public final class R {
         public static final int activity_score=0x7f030001;
         public static final int activity_settings=0x7f030002;
         public static final int activity_world=0x7f030003;
-        public static final int layout_color=0x7f030004;
-        public static final int layout_listitens=0x7f030005;
+        public static final int layout_listitens=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -62,6 +62,12 @@ public final class R {
         /**  APP 
          */
         public static final int app_name=0x7f05000b;
+        public static final int main_activity_bestTimes=0x7f05000f;
+        public static final int main_activity_exit=0x7f050010;
+        /**  Main Activity 
+         */
+        public static final int main_activity_play=0x7f05000d;
+        public static final int main_activity_settings=0x7f05000e;
         public static final int prefs_boolean_KEEP_LAST_NAME=0x7f050002;
         public static final int prefs_boolean_TRIPP=0x7f050003;
         public static final int prefs_int_NPC_EXT_COLOR=0x7f050009;
@@ -77,13 +83,31 @@ public final class R {
         public static final int prefs_string_file_MAIN_PREFS=0x7f050000;
         /**  Score Activity 
          */
-        public static final int title_activity_score=0x7f05000f;
+        public static final int score_action_resetScore=0x7f050013;
+        public static final int score_activity_listAdvanced=0x7f050018;
+        public static final int score_activity_listBeginner=0x7f05001a;
+        public static final int score_activity_listExpert=0x7f050017;
+        public static final int score_activity_listIntermediate=0x7f050019;
+        public static final int score_activity_listMaster=0x7f050016;
+        public static final int score_activity_name=0x7f050014;
+        public static final int score_activity_save=0x7f050015;
         /**  Settings Activity 
          */
-        public static final int title_activity_settings=0x7f05000e;
+        public static final int settings_activity_keepLastName=0x7f05001b;
+        public static final int settings_activity_tripp=0x7f05001c;
+        /**  Score Activity 
+         */
+        public static final int title_activity_score=0x7f05001f;
+        /**  Settings Activity 
+         */
+        public static final int title_activity_settings=0x7f05001e;
         /**  World Activity 
          */
-        public static final int title_activity_world=0x7f05000d;
+        public static final int title_activity_world=0x7f05001d;
+        /**  World Activity 
+         */
+        public static final int world_activity_start=0x7f050011;
+        public static final int world_activity_stop=0x7f050012;
     }
     public static final class style {
         /** 

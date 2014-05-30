@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -183,11 +182,11 @@ public class ScoreActivity extends Activity {
 	private void resetScore(){
 		//TODO Add to strings file
 		listArrayAdapter.clear();
-		listArrayAdapter.add("01:00.000 - Master");
-		listArrayAdapter.add("00:50.000 - Expert");
-		listArrayAdapter.add("00:40.000 - Advanced");
-		listArrayAdapter.add("00:30.000 - Intermediate");
-		listArrayAdapter.add("00:20.000 - Beginner");
+		listArrayAdapter.add("01:00.000 - " + getString(R.string.score_activity_listMaster));
+		listArrayAdapter.add("00:50.000 - " + getString(R.string.score_activity_listExpert));
+		listArrayAdapter.add("00:40.000 - " + getString(R.string.score_activity_listAdvanced));
+		listArrayAdapter.add("00:30.000 - " + getString(R.string.score_activity_listIntermediate));
+		listArrayAdapter.add("00:20.000 - " + getString(R.string.score_activity_listBeginner));
 		listArrayAdapter.notifyDataSetChanged();
 		writeFile();
 	}

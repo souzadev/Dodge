@@ -2,5 +2,5 @@
     <item
         android:id="@+id/score_action_reset"
         android:showAsAction="never"
-        android:title="Reset Score"/>
+        android:title="@string/score_action_resetScore"/>
 </menu>

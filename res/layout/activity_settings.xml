@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:checked="true"
         android:onClick="switchClick"
-        android:text="Keep last score name." />
+        android:text="@string/settings_activity_keepLastName" />
 
     <Switch
         android:id="@+id/settings_switch_tripp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="switchClick"
-        android:text="Tripp?" />
+        android:text="@string/settings_activity_tripp"/>
 
 </LinearLayout>

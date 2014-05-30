@@ -22,7 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
-import android.view.animation.CycleInterpolator;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 
@@ -118,7 +117,6 @@ public class WorldActivity extends Activity{
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {		
-		int id = item.getItemId();
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -362,7 +360,7 @@ public class WorldActivity extends Activity{
 		SurfaceHolder holder = gSurface.getHolder();
 		Canvas canvas = holder.lockCanvas();
 		if(!sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false)){
-			canvas.drawColor(Color.LTGRAY);
+			canvas.drawColor(gSurface.getBgColor());
 		}
 		for(int i = 0; i < maxBalls; i++){
 			if (balls[i] != null){

@@ -28,6 +28,9 @@ public class MainActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.main_action_settings){
+        	showSettings(null);
+        }
         return super.onOptionsItemSelected(item);
     }
     
