@@ -32,7 +32,7 @@
     
     <!-- Score Activity -->
     <string name="score_action_resetScore">Reset Times</string>
-    <string name="score_activity_name">Nome</string>
+    <string name="score_activity_name">Name</string>
     <string name="score_activity_save">Save</string>
     
     <string name="score_activity_listMaster">Master</string>
@@ -46,12 +46,17 @@
     <string name="settings_activity_tripp">Tripp?</string>
     
     <!-- World Activity -->
-    <string name="title_activity_world">WorldActivity</string>
+    <string name="title_activity_world">Dodge</string>
     
     <!-- Settings Activity -->
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
     
     <!-- Score Activity -->
-    <string name="title_activity_score">ScoreActivity</string>
+    <string name="title_activity_score">Times</string>
+    
+    <!-- Color Picker -->
+    <string name="colorPicker_newColor">New</string>
+    <string name="colorPicker_defColor">Default</string>
+    <string name="colorPicker_title">Title</string>
 
 </resources>

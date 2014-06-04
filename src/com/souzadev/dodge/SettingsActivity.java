@@ -1,9 +1,12 @@
 package com.souzadev.dodge;
 
+import com.souzadev.dodge.ColorPickerDialog.OnColorChangedListener;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +18,9 @@ public class SettingsActivity extends Activity {
 	private SharedPreferences sharedPrefs;
 	//Components
 	private Switch mSwitch;
+	private View mView;
+	
+	private ColorPickerDialog cpDialog;	
 	
 
 	//******************************************** OVERRIDE ****************************************************
@@ -24,7 +30,7 @@ public class SettingsActivity extends Activity {
 		setContentView(R.layout.activity_settings);
 		
 		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_string_file_MAIN_PREFS) ,Context.MODE_PRIVATE);
-		
+				
 		initializeComponents();
 	}
 
@@ -46,8 +52,34 @@ public class SettingsActivity extends Activity {
 		mSwitch.setChecked(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_KEEP_LAST_NAME), true));
 		
 		mSwitch = (Switch)findViewById(R.id.settings_switch_tripp);
-		mSwitch.setChecked(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false));			 
+		mSwitch.setChecked(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false));
+		
+		//Initialize Color Views
+		mView = (View)findViewById(R.id.settings_view_playerColor);
+		mView.setBackgroundColor(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), Color.GREEN));
+		
+		mView = (View)findViewById(R.id.settings_view_npcColor);
+		mView.setBackgroundColor(sharedPrefs.getInt(getString(R.string.prefs_int_NPC_IN_COLOR), Color.RED));
 	}
+	
+	private OnColorChangedListener colorListener = new OnColorChangedListener() {		
+		@Override
+		public void colorChanged(String key, int color) {
+			SharedPreferences.Editor editor = sharedPrefs.edit();
+			if (key == "player"){
+				mView = (View)findViewById(R.id.settings_view_playerColor);
+				mView.setBackgroundColor(color);				
+				editor.putInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), color);
+				editor.commit();
+				
+			}else{
+				mView = (View)findViewById(R.id.settings_view_npcColor);
+				mView.setBackgroundColor(color);
+				editor.putInt(getString(R.string.prefs_int_NPC_IN_COLOR), color);
+				editor.commit();
+			}
+		}
+	};
 	
 	//*********************************************** PUBLIC *******************************************
 	
@@ -68,5 +100,30 @@ public class SettingsActivity extends Activity {
 			editor.commit();
 			break;
 		}
+	}
+	
+	public void showColorPicker(View view){
+		int defColor = Color.BLUE;
+		int initColor = Color.BLUE;
+		String pickerKey = "";
+		
+		switch(view.getId()){
+			case R.id.settings_view_playerColor:
+				initColor =  sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), Color.GREEN);
+				defColor = Color.GREEN;
+				
+				pickerKey = "player";
+				break;
+				
+			case R.id.settings_view_npcColor:
+				initColor =  sharedPrefs.getInt(getString(R.string.prefs_int_NPC_IN_COLOR), Color.RED);
+				defColor = Color.RED;
+				
+				pickerKey = "npc";
+				break;
+		}
+				
+		cpDialog = new ColorPickerDialog(this, colorListener, pickerKey, initColor, defColor);
+		cpDialog.show();
 	}
 }

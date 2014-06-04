@@ -40,11 +40,11 @@ public class Ball {
 	}
 	
 	//********************************************** PRIVATES **************************************************
-	private void fixShader(){
-		paint.setShader(new RadialGradient(position.x, position.y, radius, inColor, extColor, Shader.TileMode.CLAMP));
+	public void fixShader(){
+		paint.setShader(new RadialGradient(position.x, position.y, radius * 1.4f, inColor, extColor, Shader.TileMode.CLAMP));
 	}
 	
-	//********************************************* SETTERS *****************************************
+	//********************************************* SETTERS ****************************************************
 	public void setRadius(float radius){
 		this.radius = radius;
 		fixShader();

@@ -10,8 +10,6 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
-import android.graphics.RadialGradient;
-import android.graphics.Shader;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -233,7 +231,10 @@ public class WorldActivity extends Activity{
 			makeBalls();
 		}
 		
-		calibrate();
+		if (balls[0] != null){
+			calibrate();
+		}
+		
 		startTime = System.currentTimeMillis();
 		chrono.setBase(SystemClock.elapsedRealtime());
 		chrono.start();
@@ -256,7 +257,7 @@ public class WorldActivity extends Activity{
 						Thread.sleep(1000 / 30);
 					}
 				}catch(Exception ex){
-//					ex.printStackTrace();
+					ex.printStackTrace();
 				}
 			}
 		};
@@ -294,8 +295,10 @@ public class WorldActivity extends Activity{
 		}
 		
 		//Detect collisions
-		if(detectCollisions()){
-			ballCollision();
+		if (balls[0] != null){
+			if(detectCollisions()){
+				ballCollision();
+			}
 		}
 	}
 	
@@ -309,7 +312,7 @@ public class WorldActivity extends Activity{
 		if((ball.getPosition().y + ball.getRadius() > bounds.y) || (ball.getPosition().y - ball.getRadius() < 0)){
 			ball.getSpeed().y *= (-1);
 		}
-		ball.getPaint().setShader(new RadialGradient(ball.getPosition().x, ball.getPosition().y, ball.getRadius(), ball.getInColor(), ball.getExtColor(), Shader.TileMode.CLAMP));
+		ball.fixShader();
 	}
 	
 	private void updateSpeed(Ball ball){

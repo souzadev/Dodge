@@ -26,23 +26,26 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int main_action_settings=0x7f08000f;
+        public static final int main_action_settings=0x7f080012;
         public static final int main_button_exit=0x7f080003;
         public static final int main_button_play=0x7f080000;
         public static final int main_button_score=0x7f080002;
         public static final int main_button_settings=0x7f080001;
-        public static final int main_button_start=0x7f08000b;
-        public static final int main_button_stop=0x7f08000c;
-        public static final int main_chronometer_time=0x7f08000d;
-        public static final int main_rLayout_bot=0x7f08000e;
-        public static final int main_rLayout_top=0x7f08000a;
-        public static final int score_action_reset=0x7f080010;
+        public static final int main_button_start=0x7f08000e;
+        public static final int main_button_stop=0x7f08000f;
+        public static final int main_chronometer_time=0x7f080010;
+        public static final int main_rLayout_bot=0x7f080011;
+        public static final int main_rLayout_top=0x7f08000d;
+        public static final int score_action_reset=0x7f080013;
         public static final int score_button_save=0x7f080006;
         public static final int score_editText_name=0x7f080005;
         public static final int score_listView_score=0x7f080007;
         public static final int score_textView_time=0x7f080004;
+        public static final int settings_linearLayout_colors=0x7f08000a;
         public static final int settings_switch_keepName=0x7f080008;
         public static final int settings_switch_tripp=0x7f080009;
+        public static final int settings_view_npcColor=0x7f08000c;
+        public static final int settings_view_playerColor=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -60,11 +63,18 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f05000c;
         /**  APP 
+ APP 
          */
         public static final int app_name=0x7f05000b;
+        public static final int colorPicker_defColor=0x7f050021;
+        /**  Color Picker 
+         */
+        public static final int colorPicker_newColor=0x7f050020;
+        public static final int colorPicker_title=0x7f050022;
         public static final int main_activity_bestTimes=0x7f05000f;
         public static final int main_activity_exit=0x7f050010;
         /**  Main Activity 
+ Main Activity 
          */
         public static final int main_activity_play=0x7f05000d;
         public static final int main_activity_settings=0x7f05000e;
@@ -79,9 +89,11 @@ public final class R {
         public static final int prefs_int_PLAYER_SPEED=0x7f050006;
         public static final int prefs_string_LAST_NAME=0x7f050001;
         /**  Prefs 
+ Prefs 
          */
         public static final int prefs_string_file_MAIN_PREFS=0x7f050000;
         /**  Score Activity 
+ Score Activity 
          */
         public static final int score_action_resetScore=0x7f050013;
         public static final int score_activity_listAdvanced=0x7f050018;
@@ -92,19 +104,24 @@ public final class R {
         public static final int score_activity_name=0x7f050014;
         public static final int score_activity_save=0x7f050015;
         /**  Settings Activity 
+ Settings Activity 
          */
         public static final int settings_activity_keepLastName=0x7f05001b;
         public static final int settings_activity_tripp=0x7f05001c;
         /**  Score Activity 
+ Score Activity 
          */
         public static final int title_activity_score=0x7f05001f;
         /**  Settings Activity 
+ Settings Activity 
          */
         public static final int title_activity_settings=0x7f05001e;
         /**  World Activity 
+ World Activity 
          */
         public static final int title_activity_world=0x7f05001d;
         /**  World Activity 
+ World Activity 
          */
         public static final int world_activity_start=0x7f050011;
         public static final int world_activity_stop=0x7f050012;
