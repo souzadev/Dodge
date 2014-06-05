@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -40,6 +43,7 @@ public class ScoreActivity extends Activity {
 	private ArrayAdapter<String> listArrayAdapter;
 	
 	//Time
+	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS");
 	
 	//******************************* OVERRIDE ***************************************
@@ -180,15 +184,28 @@ public class ScoreActivity extends Activity {
 	}
 	
 	private void resetScore(){
-		//TODO Add to strings file
-		listArrayAdapter.clear();
-		listArrayAdapter.add("01:00.000 - " + getString(R.string.score_activity_listMaster));
-		listArrayAdapter.add("00:50.000 - " + getString(R.string.score_activity_listExpert));
-		listArrayAdapter.add("00:40.000 - " + getString(R.string.score_activity_listAdvanced));
-		listArrayAdapter.add("00:30.000 - " + getString(R.string.score_activity_listIntermediate));
-		listArrayAdapter.add("00:20.000 - " + getString(R.string.score_activity_listBeginner));
-		listArrayAdapter.notifyDataSetChanged();
-		writeFile();
+		
+		new AlertDialog.Builder(this, android.R.style.Theme_Holo_Panel)
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setTitle(getString(R.string.score_resetDialog_title))
+		.setMessage(getString(R.string.score_resetDialog_message))
+		//Positive Dialog Button
+		.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int id){
+				
+				listArrayAdapter.clear();
+				listArrayAdapter.add("01:00.000 - " + getString(R.string.score_activity_listMaster));
+				listArrayAdapter.add("00:50.000 - " + getString(R.string.score_activity_listExpert));
+				listArrayAdapter.add("00:40.000 - " + getString(R.string.score_activity_listAdvanced));
+				listArrayAdapter.add("00:30.000 - " + getString(R.string.score_activity_listIntermediate));
+				listArrayAdapter.add("00:20.000 - " + getString(R.string.score_activity_listBeginner));
+				listArrayAdapter.notifyDataSetChanged();
+				writeFile();				
+			}
+		})
+		//Negative Dialog Button
+		.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener(){public void onClick(DialogInterface dialog, int id){}})		
+		.show();
 	}
 	
 	//***************************************** PUBLICS ***************************************************

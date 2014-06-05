@@ -11,6 +11,7 @@ import android.graphics.Shader;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 
 public class ColorPickerDialog extends Dialog {
 
@@ -31,9 +32,9 @@ private static class ColorPickerView extends View {
     private int[] mMainColors = new int[65536];
     private OnColorChangedListener mListener;
 
-    ColorPickerView(Context c, OnColorChangedListener l, int color,
-            int defaultColor) {
+    ColorPickerView(Context c, OnColorChangedListener l, int color, int defaultColor) {
         super(c);
+        
         mListener = l;
         mDefaultColor = defaultColor;
 
@@ -45,8 +46,6 @@ private static class ColorPickerView extends View {
         updateMainColors();
         
         mCurrentColor = color;
-        
-        
 
         // Initialize the colors of the hue slider bar
         int index = 0;
@@ -90,7 +89,7 @@ private static class ColorPickerView extends View {
         // Initializes the Paint that will draw the View
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setTextSize(12);
+        mPaint.setTextSize(20);
     }
 
     // Get the current selected color from the hue bar
@@ -169,8 +168,7 @@ private static class ColorPickerView extends View {
                 mPaint.setColor(Color.BLACK);
                 mPaint.setStrokeWidth(3);
             }
-            canvas.drawLine((x * 1)+ 10, 0, (x * 1) + 10, 40, mPaint);
-            // canvas.drawLine(0, x+10, 40, x+10, mPaint);
+            canvas.drawLine(x + 10, 10, x + 10, 50, mPaint);
         }
 
         // Display the main field colors using LinearGradient
@@ -195,19 +193,14 @@ private static class ColorPickerView extends View {
         // Draw a 'button' with the currently selected color
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(mCurrentColor);
-        //canvas.drawRect(10, 316, 138, 356, mPaint);
-        canvas.drawCircle(20, 320, 20, mPaint);
+        canvas.drawRect(10, 316, 138, 356, mPaint);
 
         // Set the text color according to the brightness of the color
-        if (Color.red(mCurrentColor) + Color.green(mCurrentColor)
-                + Color.blue(mCurrentColor) < 384)
+        if (Color.red(mCurrentColor) + Color.green(mCurrentColor) + Color.blue(mCurrentColor) < 384)
             mPaint.setColor(Color.WHITE);
         else
             mPaint.setColor(Color.BLACK);
-        canvas.drawText(
-                getResources()
-                        .getString(R.string.colorPicker_newColor), 74,
-                340, mPaint);
+        canvas.drawText(getResources().getString(R.string.colorPicker_newColor), 74, 340, mPaint);
 
         // Draw a 'button' with the default color
         mPaint.setStyle(Paint.Style.FILL);
@@ -220,15 +213,13 @@ private static class ColorPickerView extends View {
             mPaint.setColor(Color.WHITE);
         else
             mPaint.setColor(Color.BLACK);
-        canvas.drawText(
-                getResources().getString(R.string.colorPicker_defColor), 202, 340,
-                mPaint);
+        canvas.drawText(getResources().getString(R.string.colorPicker_defColor), 202, 340, mPaint);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    	//setMeasuredDimension(276, 366);
-    	setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+    	setMeasuredDimension(276, 366);
+//    	setMeasuredDimension(100, 100);
     }
 
     @Override
@@ -284,27 +275,28 @@ private static class ColorPickerView extends View {
     }
 }
 
-public ColorPickerDialog(Context context, OnColorChangedListener listener,
-        String key, int initialColor, int defaultColor) {
+public ColorPickerDialog(Context context, OnColorChangedListener listener, String key, int initialColor, int defaultColor) {
     super(context);
 
     mListener = listener;
     mKey = key;
     mInitialColor = initialColor;
     mDefaultColor = defaultColor;
+    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 }
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    OnColorChangedListener l = new OnColorChangedListener() {
-        public void colorChanged(String key, int color) {
-            mListener.colorChanged(mKey, color);
-            dismiss();
-        }
-    };
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    OnColorChangedListener l = new OnColorChangedListener() {
+	        public void colorChanged(String key, int color) {
+	            mListener.colorChanged(mKey, color);
+	            dismiss();
+	        }
+	    };
 
-    setContentView(new ColorPickerView(getContext(), l, mInitialColor, mDefaultColor));
-    setTitle(R.string.colorPicker_title);
+    	setContentView(new ColorPickerView(getContext(), l, mInitialColor, mDefaultColor));
+//    	setTitle(R.string.colorPicker_title);
+    	getWindow().setLayout(300, 386);
     }
 }

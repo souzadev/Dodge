@@ -1,7 +1,5 @@
 package com.souzadev.dodge;
 
-import com.souzadev.dodge.ColorPickerDialog.OnColorChangedListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,13 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
+
+import com.souzadev.dodge.ColorPickerDialog.OnColorChangedListener;
 
 public class SettingsActivity extends Activity {	
 	//Ambient
 	private SharedPreferences sharedPrefs;
 	//Components
 	private Switch mSwitch;
-	private View mView;
+	private TextView mView;
 	
 	private ColorPickerDialog cpDialog;	
 	
@@ -55,10 +56,10 @@ public class SettingsActivity extends Activity {
 		mSwitch.setChecked(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false));
 		
 		//Initialize Color Views
-		mView = (View)findViewById(R.id.settings_view_playerColor);
+		mView = (TextView)findViewById(R.id.settings_textView_playerColor);
 		mView.setBackgroundColor(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), Color.GREEN));
 		
-		mView = (View)findViewById(R.id.settings_view_npcColor);
+		mView = (TextView)findViewById(R.id.settings_textView_npcColor);
 		mView.setBackgroundColor(sharedPrefs.getInt(getString(R.string.prefs_int_NPC_IN_COLOR), Color.RED));
 	}
 	
@@ -67,13 +68,13 @@ public class SettingsActivity extends Activity {
 		public void colorChanged(String key, int color) {
 			SharedPreferences.Editor editor = sharedPrefs.edit();
 			if (key == "player"){
-				mView = (View)findViewById(R.id.settings_view_playerColor);
+				mView = (TextView)findViewById(R.id.settings_textView_playerColor);
 				mView.setBackgroundColor(color);				
 				editor.putInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), color);
 				editor.commit();
 				
 			}else{
-				mView = (View)findViewById(R.id.settings_view_npcColor);
+				mView = (TextView)findViewById(R.id.settings_textView_npcColor);
 				mView.setBackgroundColor(color);
 				editor.putInt(getString(R.string.prefs_int_NPC_IN_COLOR), color);
 				editor.commit();
@@ -108,14 +109,14 @@ public class SettingsActivity extends Activity {
 		String pickerKey = "";
 		
 		switch(view.getId()){
-			case R.id.settings_view_playerColor:
+			case R.id.settings_textView_playerColor:
 				initColor =  sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), Color.GREEN);
 				defColor = Color.GREEN;
 				
 				pickerKey = "player";
 				break;
 				
-			case R.id.settings_view_npcColor:
+			case R.id.settings_textView_npcColor:
 				initColor =  sharedPrefs.getInt(getString(R.string.prefs_int_NPC_IN_COLOR), Color.RED);
 				defColor = Color.RED;
 				

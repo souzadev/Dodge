@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name="com.souzadev.dodge.WorldActivity"
-            android:label="@string/title_activity_world"
+            android:label="@string/world_activity_title"
             android:parentActivityName="com.souzadev.dodge.MainActivity"
             android:screenOrientation="portrait" >
             <meta-data
@@ -33,12 +33,12 @@
         <activity
             android:name="com.souzadev.dodge.SettingsActivity"
             android:parentActivityName="com.souzadev.dodge.MainActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/settings_activity_title" >
         </activity>
         <activity
             android:name="com.souzadev.dodge.ScoreActivity"
             android:parentActivityName="com.souzadev.dodge.MainActivity"
-            android:label="@string/title_activity_score" >
+            android:label="@string/score_activity_title" >
         </activity>
     </application>
 

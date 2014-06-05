@@ -19,21 +19,27 @@
 	<!-- APP -->
     <string name="app_name">Dodge</string>
     <string name="action_settings">Settings</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     
     <!-- Main Activity -->
-    <string name="main_activity_play">Play</string>
-    <string name="main_activity_settings">Settings</string>
-    <string name="main_activity_bestTimes">Best Times</string>
-    <string name="main_activity_exit">Exit</string>
+    <string name="main_button_play">Play</string>
+    <string name="main_button_settings">Settings</string>
+    <string name="main_button_bestTimes">Best Times</string>
+    <string name="main_button_exit">Exit</string>
     
     <!-- World Activity -->
-    <string name="world_activity_start">Start</string>
-    <string name="world_activity_stop">Stop</string>
+    <string name="world_activity_title">Dodge</string>
+    <string name="world_button_start">Start</string>
+    <string name="world_button_stop">Stop</string>
     
     <!-- Score Activity -->
+    <string name="score_activity_title">Best Times</string>
     <string name="score_action_resetScore">Reset Times</string>
-    <string name="score_activity_name">Name</string>
-    <string name="score_activity_save">Save</string>
+    <string name="score_editHint_name">Name</string>
+    <string name="score_button_save">Save</string>
+    <string name="score_resetDialog_title">Reset Times</string>
+    <string name="score_resetDialog_message">Are you sure?</string>
     
     <string name="score_activity_listMaster">Master</string>
     <string name="score_activity_listExpert">Expert</string>
@@ -42,21 +48,13 @@
     <string name="score_activity_listBeginner">Beginner</string>
     
     <!-- Settings Activity -->
-    <string name="settings_activity_keepLastName">Keep last used name.</string>
-    <string name="settings_activity_tripp">Tripp?</string>
-    
-    <!-- World Activity -->
-    <string name="title_activity_world">Dodge</string>
-    
-    <!-- Settings Activity -->
-    <string name="title_activity_settings">Settings</string>
-    
-    <!-- Score Activity -->
-    <string name="title_activity_score">Times</string>
+    <string name="settings_activity_title">Settings</string>
+    <string name="settings_button_keepLastName">Keep last used name.</string>
+    <string name="settings_button_tripp">Tripp?</string>
+    <string name="settings_textView_player">Player Color</string>
+    <string name="settings_textView_npc">NPC Color</string>
     
     <!-- Color Picker -->
     <string name="colorPicker_newColor">New</string>
     <string name="colorPicker_defColor">Default</string>
-    <string name="colorPicker_title">Title</string>
-
 </resources>

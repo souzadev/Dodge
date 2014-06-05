@@ -19,21 +19,27 @@
 	<!-- APP -->
     <string name="app_name">Dodge</string>
     <string name="action_settings">Opções</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
     
     <!-- Main Activity -->
-    <string name="main_activity_play">Jogar</string>
-    <string name="main_activity_settings">Opções</string>
-    <string name="main_activity_bestTimes">Melhores Tempos</string>
-    <string name="main_activity_exit">Sair</string>
+    <string name="main_button_play">Jogar</string>
+    <string name="main_button_settings">Opções</string>
+    <string name="main_button_bestTimes">Melhores Tempos</string>
+    <string name="main_button_exit">Sair</string>
     
     <!-- World Activity -->
-    <string name="world_activity_start">Iniciar</string>
-    <string name="world_activity_stop">Parar</string>
+    <string name="world_activity_title">Dodge</string>
+    <string name="world_button_start">Iniciar</string>
+    <string name="world_button_stop">Parar</string>
     
     <!-- Score Activity -->
+    <string name="score_activity_title">Melhores Tempos</string>
     <string name="score_action_resetScore">Zerar Tempos</string>
-    <string name="score_activity_name">Nome</string>
-    <string name="score_activity_save">Salvar</string>
+    <string name="score_editHint_name">Nome</string>
+    <string name="score_button_save">Salvar</string>
+    <string name="score_resetDialog_title">Zerar Tempos</string>
+    <string name="score_resetDialog_message">Tem Certeza?</string>
     
     <string name="score_activity_listMaster">Mestre</string>
     <string name="score_activity_listExpert">Expert</string>
@@ -42,16 +48,13 @@
     <string name="score_activity_listBeginner">Iniciante</string>
     
     <!-- Settings Activity -->
-    <string name="settings_activity_keepLastName">Manter último nome usado.</string>
-    <string name="settings_activity_tripp">Brisa?</string>
+    <string name="settings_activity_title">Opções</string>
+    <string name="settings_button_keepLastName">Manter último nome usado.</string>
+    <string name="settings_button_tripp">Brisa?</string>
+    <string name="settings_textView_player">Cor do Jogador</string>
+    <string name="settings_textView_npc">Cor do NPC</string>
     
-    <!-- World Activity -->
-    <string name="title_activity_world">Dodge</string>
-    
-    <!-- Settings Activity -->
-    <string name="title_activity_settings">Opções</string>
-    
-    <!-- Score Activity -->
-    <string name="title_activity_score">Tempos</string>
-
+    <!-- Color Picker -->
+    <string name="colorPicker_newColor">Nova</string>
+    <string name="colorPicker_defColor">Padrão</string>
 </resources>

@@ -44,8 +44,8 @@ public final class R {
         public static final int settings_linearLayout_colors=0x7f08000a;
         public static final int settings_switch_keepName=0x7f080008;
         public static final int settings_switch_tripp=0x7f080009;
-        public static final int settings_view_npcColor=0x7f08000c;
-        public static final int settings_view_playerColor=0x7f08000b;
+        public static final int settings_textView_npcColor=0x7f08000c;
+        public static final int settings_textView_playerColor=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -66,18 +66,19 @@ public final class R {
  APP 
          */
         public static final int app_name=0x7f05000b;
-        public static final int colorPicker_defColor=0x7f050021;
+        public static final int colorPicker_defColor=0x7f050027;
         /**  Color Picker 
+ Color Picker 
          */
-        public static final int colorPicker_newColor=0x7f050020;
-        public static final int colorPicker_title=0x7f050022;
-        public static final int main_activity_bestTimes=0x7f05000f;
-        public static final int main_activity_exit=0x7f050010;
+        public static final int colorPicker_newColor=0x7f050026;
+        public static final int main_button_bestTimes=0x7f050011;
+        public static final int main_button_exit=0x7f050012;
         /**  Main Activity 
  Main Activity 
          */
-        public static final int main_activity_play=0x7f05000d;
-        public static final int main_activity_settings=0x7f05000e;
+        public static final int main_button_play=0x7f05000f;
+        public static final int main_button_settings=0x7f050010;
+        public static final int no=0x7f05000e;
         public static final int prefs_boolean_KEEP_LAST_NAME=0x7f050002;
         public static final int prefs_boolean_TRIPP=0x7f050003;
         public static final int prefs_int_NPC_EXT_COLOR=0x7f050009;
@@ -92,39 +93,35 @@ public final class R {
  Prefs 
          */
         public static final int prefs_string_file_MAIN_PREFS=0x7f050000;
+        public static final int score_action_resetScore=0x7f050017;
+        public static final int score_activity_listAdvanced=0x7f05001e;
+        public static final int score_activity_listBeginner=0x7f050020;
+        public static final int score_activity_listExpert=0x7f05001d;
+        public static final int score_activity_listIntermediate=0x7f05001f;
+        public static final int score_activity_listMaster=0x7f05001c;
         /**  Score Activity 
  Score Activity 
          */
-        public static final int score_action_resetScore=0x7f050013;
-        public static final int score_activity_listAdvanced=0x7f050018;
-        public static final int score_activity_listBeginner=0x7f05001a;
-        public static final int score_activity_listExpert=0x7f050017;
-        public static final int score_activity_listIntermediate=0x7f050019;
-        public static final int score_activity_listMaster=0x7f050016;
-        public static final int score_activity_name=0x7f050014;
-        public static final int score_activity_save=0x7f050015;
+        public static final int score_activity_title=0x7f050016;
+        public static final int score_button_save=0x7f050019;
+        public static final int score_editHint_name=0x7f050018;
+        public static final int score_resetDialog_message=0x7f05001b;
+        public static final int score_resetDialog_title=0x7f05001a;
         /**  Settings Activity 
  Settings Activity 
          */
-        public static final int settings_activity_keepLastName=0x7f05001b;
-        public static final int settings_activity_tripp=0x7f05001c;
-        /**  Score Activity 
- Score Activity 
-         */
-        public static final int title_activity_score=0x7f05001f;
-        /**  Settings Activity 
- Settings Activity 
-         */
-        public static final int title_activity_settings=0x7f05001e;
+        public static final int settings_activity_title=0x7f050021;
+        public static final int settings_button_keepLastName=0x7f050022;
+        public static final int settings_button_tripp=0x7f050023;
+        public static final int settings_textView_npc=0x7f050025;
+        public static final int settings_textView_player=0x7f050024;
         /**  World Activity 
  World Activity 
          */
-        public static final int title_activity_world=0x7f05001d;
-        /**  World Activity 
- World Activity 
-         */
-        public static final int world_activity_start=0x7f050011;
-        public static final int world_activity_stop=0x7f050012;
+        public static final int world_activity_title=0x7f050013;
+        public static final int world_button_start=0x7f050014;
+        public static final int world_button_stop=0x7f050015;
+        public static final int yes=0x7f05000d;
     }
     public static final class style {
         /** 

@@ -78,6 +78,7 @@ public class WorldActivity extends Activity{
 		
 		maxBalls = 5;
 		playerRadius = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_RADIUS), 3); //Player ball screen percentage
+		//TODO Useless?
 		playerSpeed = new PointF(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5), sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5));
 		playerInColor = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), Color.GREEN);
 		playerExtColor = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_EXT_COLOR), Color.BLACK);
@@ -85,12 +86,12 @@ public class WorldActivity extends Activity{
 		npcRadius = sharedPrefs.getInt(getString(R.string.prefs_int_NPC_RADIUS), 8); //Non player ball screen percentage
 		npcInColor = sharedPrefs.getInt(getString(R.string.prefs_int_NPC_IN_COLOR), Color.RED);
 		npcExtColor = sharedPrefs.getInt(getString(R.string.prefs_int_NPC_EXT_COLOR), Color.BLACK);
-		acc = 0.01f; //Acceleration
 		
 		gSurface = new GameSurface(this);
 		
+		//TODO REMOVE TESTS
 		//SMALL SCREEN TESTS
-//		gSurface.setLayoutParams(new LayoutParams(300, 300));
+//		gSurface.setLayoutParams(new LayoutParams(200, 300));
 		
 		balls = new Ball[maxBalls];
 		
@@ -122,6 +123,12 @@ public class WorldActivity extends Activity{
 	protected void onPause() {
 		super.onPause();
 		gameStop();
+	};
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		balls[0] = null;
 	};
 	
 	//*************************************** SENSOR LISTENER **********************************
@@ -207,7 +214,7 @@ public class WorldActivity extends Activity{
 	public void calibrate(){
 		sensorManager.unregisterListener(playerMoveListener);
 		sensorManager.unregisterListener(calibrationListener);
-		sensorManager.registerListener(calibrationListener, sensor, SensorManager.SENSOR_DELAY_GAME);
+		sensorManager.registerListener(calibrationListener, sensor, SensorManager.SENSOR_DELAY_GAME);		
 	}
 	
 	//******************************************* PRIVATE ****************************************
@@ -219,40 +226,42 @@ public class WorldActivity extends Activity{
 		float pRadius = (hip * playerRadius) / 100;
 		float npRadius = (hip * npcRadius) / 100;
 		
-		balls[0] = new Ball(pRadius, mid, playerSpeed, playerInColor, playerExtColor);
-		balls[1] = new Ball(npRadius, new PointF(mid.x / 2, mid.y / 2), new PointF(-3f, 3f), npcInColor, npcExtColor);
-		balls[2] = new Ball(npRadius, new PointF(mid.x * 1.5f, mid.y / 2), new PointF(2f, -1f), npcInColor, npcExtColor);
-		balls[3] = new Ball(npRadius, new PointF(mid.x, mid.y * 1.5f), new PointF(-1f, -3f), npcInColor, npcExtColor);
+		acc = npRadius / 6000; //Acceleration
+		
+		balls[0] = new Ball(pRadius, mid, new PointF((pRadius / 4.5f), (pRadius / 4.5f)), playerInColor, playerExtColor);
+		balls[1] = new Ball(npRadius, new PointF(mid.x / 2, mid.y / 2), new PointF((npRadius / 20f), (npRadius / 20f)), npcInColor, npcExtColor);
+		balls[2] = new Ball(npRadius, new PointF(mid.x * 1.5f, mid.y / 2), new PointF((npRadius / 30f), (npRadius / 60f)), npcInColor, npcExtColor);
+		balls[3] = new Ball(npRadius, new PointF(mid.x, mid.y * 1.5f), new PointF((npRadius / 60f), (npRadius / 20f)), npcInColor, npcExtColor);
 	}	
 	
 	//Main game sequence
-	private void gameStart(){
-		if (balls[0] == null){
-			makeBalls();
-		}
+	private void gameStart(){		
+		//Check if there are balls, if not create
+		if (balls[0] == null){makeBalls();}
 		
-		if (balls[0] != null){
-			calibrate();
-		}
+		//If There is no player dont calibrate or activitate de motion sensors
+		if (balls[0] != null){calibrate();}
 		
-		startTime = System.currentTimeMillis();
-		chrono.setBase(SystemClock.elapsedRealtime());
-		chrono.start();
-		
-		if(gameThread != null){
-			return;
-		}
+		//Check if thread is already running
+		if(gameThread != null){return;}
 		
 		//Tripp animations
 		if(sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false)){
 			animateColors();
 		}
 		
+		startTime = System.currentTimeMillis();
+		chrono.setBase(SystemClock.elapsedRealtime());
+		chrono.start();
+
 		gameThread = new Thread(){
 			public void run(){				
-				try{					
+				try{
 					while(true){
-						updateGame();
+						//TODO Find better way to do this shit
+						if (Integer.parseInt(chrono.getText().subSequence(3, 5).toString()) > 0){
+							updateGame();
+						}
 						drawSurface();
 						Thread.sleep(1000 / 30);
 					}
@@ -282,6 +291,8 @@ public class WorldActivity extends Activity{
 		Intent intent = new Intent(this, ScoreActivity.class);
 		intent.putExtra(MainActivity.EXTRA_TIME, deltaTime);
 		startActivity(intent);
+		
+		drawSurface();		
 	}
 
 	//Updates
@@ -365,7 +376,7 @@ public class WorldActivity extends Activity{
 		if(!sharedPrefs.getBoolean(getString(R.string.prefs_boolean_TRIPP), false)){
 			canvas.drawColor(gSurface.getBgColor());
 		}
-		for(int i = 0; i < maxBalls; i++){
+		for(int i = maxBalls-1; i >= 0 ; i--){
 			if (balls[i] != null){
 				canvas.drawCircle(balls[i].getPosition().x, balls[i].getPosition().y, balls[i].getRadius(), balls[i].getPaint());
 			}

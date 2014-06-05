@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textStyle="bold"
-        android:text="@string/main_activity_play"
+        android:text="@string/main_button_play"
         android:onClick="playGame"/>
 
     <Button
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="@string/main_activity_settings"
+        android:text="@string/main_button_settings"
         android:onClick="showSettings"/>
     
     <Button
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="@string/main_activity_bestTimes"
+        android:text="@string/main_button_bestTimes"
         android:onClick="showScore"/>    
 
     <Button
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="@string/main_activity_exit"
+        android:text="@string/main_button_exit"
         android:onClick="exitApp"/>
 
 </LinearLayout>

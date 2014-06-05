@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:checked="true"
         android:onClick="switchClick"
-        android:text="@string/settings_activity_keepLastName" />
+        android:text="@string/settings_button_keepLastName" />
 
     <Switch
         android:id="@+id/settings_switch_tripp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="switchClick"
-        android:text="@string/settings_activity_tripp"/>
+        android:text="@string/settings_button_tripp"/>
 
     <LinearLayout
         android:id="@+id/settings_linearLayout_colors"
@@ -28,22 +28,32 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <View
-            android:id="@+id/settings_view_playerColor"
+       <TextView
+            android:id="@+id/settings_textView_playerColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:background="#D5D5DA"
+            
+            android:text="@string/settings_textView_player"
+            android:textSize="20sp"
+            
+            android:clickable="true"
             android:onClick="showColorPicker"/>
 
-        <View
-            android:id="@+id/settings_view_npcColor"
+        <TextView
+            android:id="@+id/settings_textView_npcColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:background="#D5D5DA"
+                        
+            android:text="@string/settings_textView_npc"
+            android:textSize="20sp"
+            
+            android:clickable="true"
             android:onClick="showColorPicker"/>
         
     </LinearLayout>
