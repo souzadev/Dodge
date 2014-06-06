@@ -58,4 +58,16 @@
         
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/settings_textView_playerSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_textView_playerSpeed" />
+
+    <NumberPicker
+        android:id="@+id/settings_numberPicker_playerSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="numberPicked" />
+
 </LinearLayout>

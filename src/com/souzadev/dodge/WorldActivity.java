@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 
@@ -78,7 +79,6 @@ public class WorldActivity extends Activity{
 		
 		maxBalls = 5;
 		playerRadius = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_RADIUS), 3); //Player ball screen percentage
-		//TODO Useless?
 		playerSpeed = new PointF(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5), sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5));
 		playerInColor = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_IN_COLOR), Color.GREEN);
 		playerExtColor = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_EXT_COLOR), Color.BLACK);
@@ -228,7 +228,7 @@ public class WorldActivity extends Activity{
 		
 		acc = npRadius / 6000; //Acceleration
 		
-		balls[0] = new Ball(pRadius, mid, new PointF((pRadius / 4.5f), (pRadius / 4.5f)), playerInColor, playerExtColor);
+		balls[0] = new Ball(pRadius, mid, playerSpeed, playerInColor, playerExtColor);
 		balls[1] = new Ball(npRadius, new PointF(mid.x / 2, mid.y / 2), new PointF((npRadius / 20f), (npRadius / 20f)), npcInColor, npcExtColor);
 		balls[2] = new Ball(npRadius, new PointF(mid.x * 1.5f, mid.y / 2), new PointF((npRadius / 30f), (npRadius / 60f)), npcInColor, npcExtColor);
 		balls[3] = new Ball(npRadius, new PointF(mid.x, mid.y * 1.5f), new PointF((npRadius / 60f), (npRadius / 20f)), npcInColor, npcExtColor);

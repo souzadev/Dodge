@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.NumberPicker.OnValueChangeListener;
 
 import com.souzadev.dodge.ColorPickerDialog.OnColorChangedListener;
 
@@ -20,6 +22,7 @@ public class SettingsActivity extends Activity {
 	//Components
 	private Switch mSwitch;
 	private TextView mView;
+	private NumberPicker mNumberPicker;
 	
 	private ColorPickerDialog cpDialog;	
 	
@@ -61,7 +64,23 @@ public class SettingsActivity extends Activity {
 		
 		mView = (TextView)findViewById(R.id.settings_textView_npcColor);
 		mView.setBackgroundColor(sharedPrefs.getInt(getString(R.string.prefs_int_NPC_IN_COLOR), Color.RED));
+		
+		//Initialize Number Picker
+		mNumberPicker = (NumberPicker)findViewById(R.id.settings_numberPicker_playerSpeed);
+		mNumberPicker.setMinValue(1);
+		mNumberPicker.setMaxValue(10);
+		mNumberPicker.setValue(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5));
+		mNumberPicker.setOnValueChangedListener(pickerValueListener);
 	}
+	
+	private OnValueChangeListener pickerValueListener = new OnValueChangeListener() {
+		@Override
+		public void onValueChange(NumberPicker picker, int oldVal, int newVal) {		
+			Editor editor = sharedPrefs.edit();
+			editor.putInt(getString(R.string.prefs_int_PLAYER_SPEED), newVal);
+			editor.commit();			
+		}
+	};
 	
 	private OnColorChangedListener colorListener = new OnColorChangedListener() {		
 		@Override

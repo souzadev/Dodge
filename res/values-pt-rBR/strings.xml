@@ -53,6 +53,7 @@
     <string name="settings_button_tripp">Brisa?</string>
     <string name="settings_textView_player">Cor do Jogador</string>
     <string name="settings_textView_npc">Cor do NPC</string>
+    <string name="settings_textView_playerSpeed">Velocidade do Jogador.</string>
     
     <!-- Color Picker -->
     <string name="colorPicker_newColor">Nova</string>

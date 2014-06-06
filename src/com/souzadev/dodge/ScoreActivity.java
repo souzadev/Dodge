@@ -81,7 +81,7 @@ public class ScoreActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.score_action_reset) {
-			resetScore();
+			resetScoreDialog();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -183,7 +183,7 @@ public class ScoreActivity extends Activity {
 		return position;
 	}
 	
-	private void resetScore(){
+	private void resetScoreDialog(){
 		
 		new AlertDialog.Builder(this, android.R.style.Theme_Holo_Panel)
 		.setIcon(android.R.drawable.ic_dialog_alert)
@@ -192,20 +192,23 @@ public class ScoreActivity extends Activity {
 		//Positive Dialog Button
 		.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int id){
-				
-				listArrayAdapter.clear();
-				listArrayAdapter.add("01:00.000 - " + getString(R.string.score_activity_listMaster));
-				listArrayAdapter.add("00:50.000 - " + getString(R.string.score_activity_listExpert));
-				listArrayAdapter.add("00:40.000 - " + getString(R.string.score_activity_listAdvanced));
-				listArrayAdapter.add("00:30.000 - " + getString(R.string.score_activity_listIntermediate));
-				listArrayAdapter.add("00:20.000 - " + getString(R.string.score_activity_listBeginner));
-				listArrayAdapter.notifyDataSetChanged();
-				writeFile();				
+				resetScore();				
 			}
 		})
 		//Negative Dialog Button
 		.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener(){public void onClick(DialogInterface dialog, int id){}})		
 		.show();
+	}
+	
+	private void resetScore(){
+		listArrayAdapter.clear();
+		listArrayAdapter.add("01:00.000 - " + getString(R.string.score_activity_listMaster));
+		listArrayAdapter.add("00:50.000 - " + getString(R.string.score_activity_listExpert));
+		listArrayAdapter.add("00:40.000 - " + getString(R.string.score_activity_listAdvanced));
+		listArrayAdapter.add("00:30.000 - " + getString(R.string.score_activity_listIntermediate));
+		listArrayAdapter.add("00:20.000 - " + getString(R.string.score_activity_listBeginner));
+		listArrayAdapter.notifyDataSetChanged();
+		writeFile();
 	}
 	
 	//***************************************** PUBLICS ***************************************************

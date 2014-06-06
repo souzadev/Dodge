@@ -26,26 +26,28 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int main_action_settings=0x7f080012;
+        public static final int main_action_settings=0x7f080014;
         public static final int main_button_exit=0x7f080003;
         public static final int main_button_play=0x7f080000;
         public static final int main_button_score=0x7f080002;
         public static final int main_button_settings=0x7f080001;
-        public static final int main_button_start=0x7f08000e;
-        public static final int main_button_stop=0x7f08000f;
-        public static final int main_chronometer_time=0x7f080010;
-        public static final int main_rLayout_bot=0x7f080011;
-        public static final int main_rLayout_top=0x7f08000d;
-        public static final int score_action_reset=0x7f080013;
+        public static final int main_button_start=0x7f080010;
+        public static final int main_button_stop=0x7f080011;
+        public static final int main_chronometer_time=0x7f080012;
+        public static final int main_rLayout_bot=0x7f080013;
+        public static final int main_rLayout_top=0x7f08000f;
+        public static final int score_action_reset=0x7f080015;
         public static final int score_button_save=0x7f080006;
         public static final int score_editText_name=0x7f080005;
         public static final int score_listView_score=0x7f080007;
         public static final int score_textView_time=0x7f080004;
         public static final int settings_linearLayout_colors=0x7f08000a;
+        public static final int settings_numberPicker_playerSpeed=0x7f08000e;
         public static final int settings_switch_keepName=0x7f080008;
         public static final int settings_switch_tripp=0x7f080009;
         public static final int settings_textView_npcColor=0x7f08000c;
         public static final int settings_textView_playerColor=0x7f08000b;
+        public static final int settings_textView_playerSpeed=0x7f08000d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -66,11 +68,11 @@ public final class R {
  APP 
          */
         public static final int app_name=0x7f05000b;
-        public static final int colorPicker_defColor=0x7f050027;
+        public static final int colorPicker_defColor=0x7f050028;
         /**  Color Picker 
  Color Picker 
          */
-        public static final int colorPicker_newColor=0x7f050026;
+        public static final int colorPicker_newColor=0x7f050027;
         public static final int main_button_bestTimes=0x7f050011;
         public static final int main_button_exit=0x7f050012;
         /**  Main Activity 
@@ -115,6 +117,7 @@ public final class R {
         public static final int settings_button_tripp=0x7f050023;
         public static final int settings_textView_npc=0x7f050025;
         public static final int settings_textView_player=0x7f050024;
+        public static final int settings_textView_playerSpeed=0x7f050026;
         /**  World Activity 
  World Activity 
          */

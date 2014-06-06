@@ -53,6 +53,7 @@
     <string name="settings_button_tripp">Tripp?</string>
     <string name="settings_textView_player">Player Color</string>
     <string name="settings_textView_npc">NPC Color</string>
+    <string name="settings_textView_playerSpeed">Player Speed</string>
     
     <!-- Color Picker -->
     <string name="colorPicker_newColor">New</string>
