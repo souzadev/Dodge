@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,12 +18,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class ScoreActivity extends Activity {	
 	//Core
@@ -45,6 +53,12 @@ public class ScoreActivity extends Activity {
 	//Time
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS");
+	
+	//ADS
+	private AdView adView;
+	private static final String AD_UNIT_ID = "ca-app-pub-5104897685750315/3844846189";
+	private static final String DEVICE_ID = "AE279B9C2F7AE55662682438B86E1C98";
+		
 	
 	//******************************* OVERRIDE ***************************************
 	@Override
@@ -69,6 +83,7 @@ public class ScoreActivity extends Activity {
 			editText.setVisibility(View.VISIBLE);
 			button.setVisibility(View.VISIBLE);
 		}
+				
 	}
 	
 	@Override
@@ -92,6 +107,14 @@ public class ScoreActivity extends Activity {
 		this.finish();
 	}
 	
+	@Override
+	protected void onDestroy() {
+		if (adView != null){
+    		adView.destroy();
+    	}
+    	super.onDestroy();
+	};
+	
 	//************************************* PRIVATE ****************************************
 	
 	private void initializeComponents(){
@@ -112,7 +135,28 @@ public class ScoreActivity extends Activity {
 		listView = (ListView)findViewById(R.id.score_listView_score);
 		listArrayAdapter = new ArrayAdapter<String>(this, R.layout.layout_listitens, readFile());
 		listView.setAdapter(listArrayAdapter);
+		
+		initAds();
+		
 	}
+	
+	private void initAds(){
+    	//CREATE AD
+        adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId(AD_UNIT_ID);
+        
+        //ADD VIEW TO LAYOUT
+        RelativeLayout layout = (RelativeLayout)findViewById(R.id.score_relativeLayout_main);
+        layout.addView(adView);
+        
+        //CREATE AD REQUEST
+        AdRequest adRequest = new AdRequest.Builder()
+        	.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+        	.addTestDevice(DEVICE_ID)
+        	.build();
+        adView.loadAd(adRequest);
+    }
 	
 	private void writeFile(){
 		try{									

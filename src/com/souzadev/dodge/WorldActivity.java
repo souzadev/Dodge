@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
 

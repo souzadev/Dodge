@@ -10,9 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.NumberPicker.OnValueChangeListener;
 
 import com.souzadev.dodge.ColorPickerDialog.OnColorChangedListener;
 
