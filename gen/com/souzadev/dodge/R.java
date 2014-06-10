@@ -408,7 +408,6 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f02001f;
     }
     public static final class id {
-        public static final int adView=0x7f06001e;
         public static final int book_now=0x7f060010;
         public static final int buyButton=0x7f06000a;
         public static final int buy_now=0x7f06000f;
@@ -418,17 +417,19 @@ containing a value of this type.
         public static final int holo_dark=0x7f060005;
         public static final int holo_light=0x7f060006;
         public static final int hybrid=0x7f060004;
-        public static final int main_action_settings=0x7f06002b;
+        public static final int main_action_settings=0x7f06002d;
+        public static final int main_adView_ads=0x7f060019;
         public static final int main_button_exit=0x7f060018;
+        public static final int main_button_help=0x7f060029;
         public static final int main_button_play=0x7f060015;
         public static final int main_button_score=0x7f060016;
         public static final int main_button_settings=0x7f060017;
-        public static final int main_button_start=0x7f060027;
+        public static final int main_button_start=0x7f06002b;
         public static final int main_button_stop=0x7f060028;
-        public static final int main_chronometer_time=0x7f060029;
+        public static final int main_chronometer_time=0x7f06002a;
         public static final int main_linearLayout_mainMenu=0x7f060014;
-        public static final int main_rLayout_bot=0x7f06002a;
-        public static final int main_rLayout_top=0x7f060026;
+        public static final int main_rLayout_bot=0x7f06002c;
+        public static final int main_rLayout_top=0x7f060027;
         public static final int match_parent=0x7f06000c;
         public static final int monochrome=0x7f060013;
         public static final int none=0x7f060000;
@@ -436,20 +437,21 @@ containing a value of this type.
         public static final int production=0x7f060007;
         public static final int sandbox=0x7f060008;
         public static final int satellite=0x7f060002;
-        public static final int score_action_reset=0x7f06002c;
-        public static final int score_button_save=0x7f06001c;
-        public static final int score_editText_name=0x7f06001b;
-        public static final int score_listView_score=0x7f06001d;
-        public static final int score_relativeLayout_main=0x7f060019;
-        public static final int score_textView_time=0x7f06001a;
+        public static final int score_action_reset=0x7f06002e;
+        public static final int score_adView_ads=0x7f06001f;
+        public static final int score_button_save=0x7f06001d;
+        public static final int score_editText_name=0x7f06001c;
+        public static final int score_listView_score=0x7f06001e;
+        public static final int score_relativeLayout_ads=0x7f06001a;
+        public static final int score_textView_time=0x7f06001b;
         public static final int selectionDetails=0x7f06000b;
-        public static final int settings_linearLayout_colors=0x7f060021;
-        public static final int settings_numberPicker_playerSpeed=0x7f060025;
-        public static final int settings_switch_keepName=0x7f06001f;
-        public static final int settings_switch_tripp=0x7f060020;
-        public static final int settings_textView_npcColor=0x7f060023;
-        public static final int settings_textView_playerColor=0x7f060022;
-        public static final int settings_textView_playerSpeed=0x7f060024;
+        public static final int settings_linearLayout_colors=0x7f060022;
+        public static final int settings_numberPicker_playerSpeed=0x7f060026;
+        public static final int settings_switch_keepName=0x7f060020;
+        public static final int settings_switch_tripp=0x7f060021;
+        public static final int settings_textView_npcColor=0x7f060024;
+        public static final int settings_textView_playerColor=0x7f060023;
+        public static final int settings_textView_playerSpeed=0x7f060025;
         public static final int strict_sandbox=0x7f060009;
         public static final int terrain=0x7f060003;
         public static final int wrap_content=0x7f06000d;
@@ -471,22 +473,19 @@ containing a value of this type.
         public static final int world=0x7f0a0003;
     }
     public static final class string {
-        public static final int action_settings=0x7f04002c;
-        /**  APP 
- APP 
-         */
-        public static final int app_name=0x7f04002b;
+        public static final int action_settings=0x7f04002d;
+        public static final int app_name=0x7f04002c;
         public static final int auth_client_needs_enabling_title=0x7f040001;
         public static final int auth_client_needs_installation_title=0x7f040002;
         public static final int auth_client_needs_update_title=0x7f040003;
         public static final int auth_client_play_services_err_notification_msg=0x7f040004;
         public static final int auth_client_requested_by_msg=0x7f040005;
         public static final int auth_client_using_bad_version_title=0x7f040000;
-        public static final int colorPicker_defColor=0x7f040048;
+        public static final int colorPicker_defColor=0x7f04004b;
         /**  Color Picker 
  Color Picker 
          */
-        public static final int colorPicker_newColor=0x7f040047;
+        public static final int colorPicker_newColor=0x7f04004a;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -576,14 +575,18 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f04001e;
-        public static final int main_button_bestTimes=0x7f040031;
-        public static final int main_button_exit=0x7f040032;
+        /**  App 
+ App 
+         */
+        public static final int help_text=0x7f04002b;
+        public static final int main_button_bestTimes=0x7f040032;
+        public static final int main_button_exit=0x7f040033;
         /**  Main Activity 
  Main Activity 
          */
-        public static final int main_button_play=0x7f04002f;
-        public static final int main_button_settings=0x7f040030;
-        public static final int no=0x7f04002e;
+        public static final int main_button_play=0x7f040030;
+        public static final int main_button_settings=0x7f040031;
+        public static final int no=0x7f04002f;
         public static final int prefs_boolean_KEEP_LAST_NAME=0x7f040022;
         public static final int prefs_boolean_TRIPP=0x7f040023;
         public static final int prefs_int_NPC_EXT_COLOR=0x7f040029;
@@ -595,32 +598,31 @@ containing a value of this type.
         public static final int prefs_int_PLAYER_SPEED=0x7f040026;
         public static final int prefs_string_LAST_NAME=0x7f040021;
         /**  Prefs 
- Prefs 
          */
         public static final int prefs_string_file_MAIN_PREFS=0x7f040020;
-        public static final int score_action_resetScore=0x7f040037;
-        public static final int score_activity_listAdvanced=0x7f04003e;
-        public static final int score_activity_listBeginner=0x7f040040;
-        public static final int score_activity_listExpert=0x7f04003d;
-        public static final int score_activity_listIntermediate=0x7f04003f;
-        public static final int score_activity_listMaster=0x7f04003c;
+        public static final int score_action_resetScore=0x7f04003a;
+        public static final int score_activity_listAdvanced=0x7f040041;
+        public static final int score_activity_listBeginner=0x7f040043;
+        public static final int score_activity_listExpert=0x7f040040;
+        public static final int score_activity_listIntermediate=0x7f040042;
+        public static final int score_activity_listMaster=0x7f04003f;
         /**  Score Activity 
  Score Activity 
          */
-        public static final int score_activity_title=0x7f040036;
-        public static final int score_button_save=0x7f040039;
-        public static final int score_editHint_name=0x7f040038;
-        public static final int score_resetDialog_message=0x7f04003b;
-        public static final int score_resetDialog_title=0x7f04003a;
+        public static final int score_activity_title=0x7f040039;
+        public static final int score_button_save=0x7f04003c;
+        public static final int score_editHint_name=0x7f04003b;
+        public static final int score_resetDialog_message=0x7f04003e;
+        public static final int score_resetDialog_title=0x7f04003d;
         /**  Settings Activity 
  Settings Activity 
          */
-        public static final int settings_activity_title=0x7f040041;
-        public static final int settings_button_keepLastName=0x7f040042;
-        public static final int settings_button_tripp=0x7f040043;
-        public static final int settings_textView_npc=0x7f040045;
-        public static final int settings_textView_player=0x7f040044;
-        public static final int settings_textView_playerSpeed=0x7f040046;
+        public static final int settings_activity_title=0x7f040044;
+        public static final int settings_button_keepLastName=0x7f040045;
+        public static final int settings_button_tripp=0x7f040046;
+        public static final int settings_textView_npc=0x7f040048;
+        public static final int settings_textView_player=0x7f040047;
+        public static final int settings_textView_playerSpeed=0x7f040049;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */
@@ -628,10 +630,12 @@ containing a value of this type.
         /**  World Activity 
  World Activity 
          */
-        public static final int world_activity_title=0x7f040033;
-        public static final int world_button_start=0x7f040034;
-        public static final int world_button_stop=0x7f040035;
-        public static final int yes=0x7f04002d;
+        public static final int world_activity_title=0x7f040034;
+        public static final int world_button_help=0x7f040037;
+        public static final int world_button_start=0x7f040035;
+        public static final int world_button_stop=0x7f040036;
+        public static final int world_helpDialog_title=0x7f040038;
+        public static final int yes=0x7f04002e;
     }
     public static final class style {
         /** 

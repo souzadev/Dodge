@@ -18,18 +18,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 public class ScoreActivity extends Activity {	
@@ -56,9 +52,6 @@ public class ScoreActivity extends Activity {
 	
 	//ADS
 	private AdView adView;
-	private static final String AD_UNIT_ID = "ca-app-pub-5104897685750315/3844846189";
-	private static final String DEVICE_ID = "AE279B9C2F7AE55662682438B86E1C98";
-		
 	
 	//******************************* OVERRIDE ***************************************
 	@Override
@@ -137,24 +130,14 @@ public class ScoreActivity extends Activity {
 		listView.setAdapter(listArrayAdapter);
 		
 		initAds();
-		
 	}
 	
 	private void initAds(){
     	//CREATE AD
-        adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId(AD_UNIT_ID);
-        
-        //ADD VIEW TO LAYOUT
-        RelativeLayout layout = (RelativeLayout)findViewById(R.id.score_relativeLayout_main);
-        layout.addView(adView);
+		adView = (AdView)findViewById(R.id.score_adView_ads);
         
         //CREATE AD REQUEST
-        AdRequest adRequest = new AdRequest.Builder()
-        	.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-        	.addTestDevice(DEVICE_ID)
-        	.build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(MainActivity.DEVICE_ID).build();
         adView.loadAd(adRequest);
     }
 	
@@ -259,6 +242,7 @@ public class ScoreActivity extends Activity {
 	public void saveScore(View view){
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+		
 		name = editText.getText().toString();
 		addScore(time, name);
 
