@@ -1,10 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
     android:orientation="vertical" >
 
     <Switch
@@ -28,7 +25,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-       <Button
+       <TextView
             android:id="@+id/settings_textView_playerColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -67,7 +64,13 @@
     <NumberPicker
         android:id="@+id/settings_numberPicker_playerSpeed"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="numberPicked" />
+        android:layout_height="wrap_content"/>
+    
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/score_adView_ads"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		ads:adSize="BANNER"
+		ads:adUnitId="ca-app-pub-5104897685750315/3844846189"/>
 
 </LinearLayout>

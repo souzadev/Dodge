@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +28,7 @@ public class WorldActivity extends Activity{
 	//Ambient
 	private Thread gameThread;
 	private GameSurface gSurface;	
-	private Ball[] balls;	
+	private Ball[] balls;
 	private int maxBalls;
 	
 	SharedPreferences sharedPrefs;
@@ -75,7 +76,6 @@ public class WorldActivity extends Activity{
 		//Initialize ambient
 		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_string_file_MAIN_PREFS) ,Context.MODE_PRIVATE);
 		
-		
 		maxBalls = 5;
 		playerRadius = sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_RADIUS), 3); //Player ball screen percentage
 		playerSpeed = new PointF(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5), sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5));
@@ -87,10 +87,6 @@ public class WorldActivity extends Activity{
 		npcExtColor = sharedPrefs.getInt(getString(R.string.prefs_int_NPC_EXT_COLOR), Color.BLACK);
 		
 		gSurface = new GameSurface(this);
-		
-		//TODO REMOVE TESTS
-		//SMALL SCREEN TESTS
-//		gSurface.setLayoutParams(new LayoutParams(200, 300));
 		
 		balls = new Ball[maxBalls];
 		
@@ -414,6 +410,14 @@ public class WorldActivity extends Activity{
 		objAnimator.start();
 	}
 	
+	private void showHelpDialog(){
+		new AlertDialog.Builder(this, android.R.style.Theme_Holo_Panel)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setTitle(getString(R.string.world_helpDialog_title))
+			.setMessage(getString(R.string.help_text))
+			.setNeutralButton(getString(android.R.string.ok), null)
+			.show();		
+	}
 	
 	//******************************************* PUBLIC ******************************************
 	public void buttonStart(View view){
@@ -422,5 +426,9 @@ public class WorldActivity extends Activity{
 	
 	public void buttonStop(View view){
 		gameStop();
+	}
+	
+	public void buttonHelp(View view){
+		showHelpDialog();
 	}
 }

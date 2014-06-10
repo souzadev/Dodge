@@ -14,6 +14,8 @@ import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.souzadev.dodge.ColorPickerDialog.OnColorChangedListener;
 
 public class SettingsActivity extends Activity {	
@@ -25,7 +27,8 @@ public class SettingsActivity extends Activity {
 	private NumberPicker mNumberPicker;
 	
 	private ColorPickerDialog cpDialog;	
-	
+	//Ads
+	AdView adView;
 
 	//******************************************** OVERRIDE ****************************************************
 	@Override
@@ -36,6 +39,7 @@ public class SettingsActivity extends Activity {
 		sharedPrefs = this.getSharedPreferences(getString(R.string.prefs_string_file_MAIN_PREFS) ,Context.MODE_PRIVATE);
 				
 		initializeComponents();
+		initAds();
 	}
 
 	@Override
@@ -48,6 +52,14 @@ public class SettingsActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	protected void onDestroy() {
+		if (adView != null){
+    		adView.destroy();
+    	}
+    	super.onDestroy();
+	};
 	
 	//********************************************** PRIVATE ******************************************
 	private void initializeComponents(){
@@ -72,6 +84,15 @@ public class SettingsActivity extends Activity {
 		mNumberPicker.setValue(sharedPrefs.getInt(getString(R.string.prefs_int_PLAYER_SPEED), 5));
 		mNumberPicker.setOnValueChangedListener(pickerValueListener);
 	}
+	
+	private void initAds(){
+    	//CREATE AD
+		adView = (AdView)findViewById(R.id.score_adView_ads);
+        
+        //CREATE AD REQUEST
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(MainActivity.DEVICE_ID).build();
+        adView.loadAd(adRequest);
+    }
 	
 	private OnValueChangeListener pickerValueListener = new OnValueChangeListener() {
 		@Override
