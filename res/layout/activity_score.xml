@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScoreActivity" >
-
+    
     <com.google.android.gms.ads.AdView
         android:id="@+id/score_adView_ads"
 		android:layout_width="wrap_content"
@@ -13,7 +13,7 @@
 		android:layout_alignParentTop="true"
 		ads:adSize="BANNER"
 		ads:adUnitId="ca-app-pub-5104897685750315/3844846189"/>
-    
+
     <TextView
         android:id="@+id/score_textView_time"
         android:layout_width="wrap_content"
@@ -54,5 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/score_editText_name"/>    
+        android:layout_below="@+id/score_editText_name"/>
+    
 </RelativeLayout>
